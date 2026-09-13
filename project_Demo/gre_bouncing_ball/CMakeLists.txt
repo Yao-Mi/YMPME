@@ -1,0 +1,16 @@
+add_executable(demo_gre_bouncing_ball main.c scene.c)
+target_link_libraries(demo_gre_bouncing_ball PRIVATE ympme_gre ymgre)
+if(YMPME_GRE_WINDOW)
+	if(NOT TARGET ymgre_demo_host)
+		message(FATAL_ERROR "The existing ymgre target must enable YMGRE_BUILD_YMGUI_HOST for window demos")
+	endif()
+	target_sources(demo_gre_bouncing_ball PRIVATE window.c)
+	target_compile_definitions(demo_gre_bouncing_ball PRIVATE YMPME_GRE_WINDOW=1)
+	target_link_libraries(demo_gre_bouncing_ball PRIVATE ymgre_demo_host)
+	if(YMPME_BUILD_TESTS)
+		add_test(NAME ympme_gre_window COMMAND demo_gre_bouncing_ball --smoke-test)
+		set_tests_properties(ympme_gre_window PROPERTIES
+			ENVIRONMENT "YMGRE_HEADLESS=1;YMGRE_WINDOW_SCALE=1;YMGRE_MAX_FRAMES=0"
+			TIMEOUT 30)
+	endif()
+endif()

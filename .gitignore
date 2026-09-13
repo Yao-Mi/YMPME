@@ -1,0 +1,59 @@
+# Build trees and generated SDK packages (keep sdk/ source scripts)
+build/
+build-*/
+build_*/
+cmake-build-*/
+/out/
+/dist/
+
+# CMake / CTest / Ninja generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+DartConfiguration.tcl
+Testing/
+compile_commands.json
+CMakeUserPresets.json
+.ninja_deps
+.ninja_log
+build.ninja
+rules.ninja
+
+# Compiled objects, libraries, executables and profiling data
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.idb
+*.dSYM/
+*.gcda
+*.gcno
+*.profraw
+*.profdata
+
+# Python tooling caches and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime output and local temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+ympme_ball_*.ppm
+.DS_Store
+Thumbs.db

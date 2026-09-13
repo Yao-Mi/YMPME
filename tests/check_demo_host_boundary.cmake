@@ -1,0 +1,10 @@
+get_filename_component(pme_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+file(GLOB_RECURSE demo_sources "${pme_root}/project_Demo/*.c" "${pme_root}/project_Demo/*.h"
+ "${pme_root}/Demo/*.c" "${pme_root}/Demo/*.h" "${pme_root}/YMPME/*.c" "${pme_root}/YMPME/*.h")
+foreach(source IN LISTS demo_sources)
+ file(READ "${source}" text)
+ if(text MATCHES "#[ \t]*include[ \t]*[<\"][^>\"]*SDL" OR text MATCHES "SDL_[A-Za-z0-9_]+|SDLK_[A-Za-z0-9_]+|SDLCALL")
+  message(FATAL_ERROR "PME must use GRE host interfaces, found direct SDL dependency: ${source}")
+ endif()
+endforeach()
+message(STATUS "PME window boundary: no direct platform API in physics or demos")

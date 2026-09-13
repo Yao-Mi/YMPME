@@ -1,0 +1,8 @@
+add_library(ympme_gear_scene STATIC scene.c)
+target_link_libraries(ympme_gear_scene PUBLIC YMPME::gear ymgre)
+add_executable(demo_gear_mesh main.c)
+target_link_libraries(demo_gear_mesh PRIVATE ympme_gear_scene ymgre_demo_host)
+if(YMPME_BUILD_TESTS)
+ add_test(NAME ympme_gear_window COMMAND demo_gear_mesh --smoke-test)
+ set_tests_properties(ympme_gear_window PROPERTIES ENVIRONMENT "YMGRE_HEADLESS=1;YMGRE_MAX_FRAMES=0;YMGRE_WINDOW_SCALE=1" TIMEOUT 90)
+endif()

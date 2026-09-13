@@ -1,0 +1,7 @@
+add_library(ympme_softbody STATIC YMPME_SoftPad.c YMPME_SoftBall.c)
+add_library(YMPME::softbody ALIAS ympme_softbody)
+target_link_libraries(ympme_softbody PUBLIC YMPME::ympme)
+if(NOT MSVC)
+ target_compile_options(ympme_softbody PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
+target_compile_definitions(ympme_softbody PUBLIC PME_ENABLE_SOFTBODY=1)

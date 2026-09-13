@@ -1,0 +1,6 @@
+add_executable(demo_rope_lab main.c)
+target_link_libraries(demo_rope_lab PRIVATE YMPME::rope_gre ymgre_demo_host)
+if(YMPME_BUILD_TESTS)
+ add_test(NAME ympme_rope_window COMMAND demo_rope_lab --smoke-test)
+ set_tests_properties(ympme_rope_window PROPERTIES ENVIRONMENT "YMGRE_HEADLESS=1;YMGRE_MAX_FRAMES=0;YMGRE_WINDOW_SCALE=1" TIMEOUT 90)
+endif()
