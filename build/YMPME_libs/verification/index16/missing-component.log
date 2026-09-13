@@ -1,0 +1,22 @@
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring incomplete, errors occurred!
+See also "/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/missing-component/build/CMakeFiles/CMakeOutput.log".
+CMake Error at CMakeLists.txt:3 (find_package):
+  Found package configuration file:
+
+    /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/cmake/YMPMEConfig.cmake
+
+  but it set YMPME_FOUND to FALSE so package "YMPME" is considered to be NOT
+  FOUND.  Reason given by package:
+
+  Component 'not_a_real_module' is not in this YMPME build.  Available:
+  ympme;rigid;joint;dynamics;query;flight;drive;terrain;suspension;vehicle;gear;belt;pulley;rope;aircraft;pendulum;surface_atlas;skin_contact;softbody;sensor;sensor_geometry;imu;encoder;force_sensor;laser;lidar;depth;tactile
+
+
+
+

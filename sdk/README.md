@@ -1,13 +1,13 @@
 # YMPME 分模块 SDK
 
-可搬移的 C99 物理引擎开发包。包含核心与可选模块的独立静态库、匹配头文件、CMake 导入配置、使用手册及三个无窗口示例。无需 PME 源码、GRE、SDL 或 YMSKE。
+可搬移的 C99 物理引擎开发包。包含核心与可选模块的独立静态库、匹配头文件、CMake 导入配置、使用手册及按模块启用的无窗口示例。无需 PME 源码、GRE、SDL 或 YMSKE。
 
 | 目录 | 内容 |
 |---|---|
 | `include/YMPME/` | 核心及可选模块头文件，保持原有目录结构 |
 | `lib/` | 分模块静态库；只链接需要的目标及其必要依赖 |
 | `cmake/` | `find_package(YMPME CONFIG REQUIRED)` 配置及版本信息 |
-| `examples/` | 自由落体、刚体接触与力反馈、uint16 编码器回绕示例 |
+| `examples/` | 自由落体、刚体接触、编码器、共享网格及可选 GRE 共享示例 |
 | `bin/` | 本机构建的无窗口示例可执行文件 |
 | `docs/`、`手册.md` | API、架构、碰撞说明和 SDK 使用方法 |
 | `BUILD_INFO.json` | 平台、编译器、构建选项、源码摘要 |
@@ -22,7 +22,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(my_sim C)
 set(CMAKE_C_STANDARD 99)
-find_package(YMPME 0.2 CONFIG REQUIRED COMPONENTS dynamics)
+find_package(YMPME 0.3 CONFIG REQUIRED COMPONENTS dynamics)
 add_executable(my_sim main.c)
 target_link_libraries(my_sim PRIVATE YMPME::dynamics)
 ```
@@ -44,6 +44,8 @@ cmake --build examples-build
 ctest --test-dir examples-build --output-on-failure
 ```
 
-核心裁剪包仅提供自由落体示例；其他示例按已有模块自动启用。没有桌面入口或 shell 启动包装。
+核心裁剪包提供自由落体和共享网格索引示例；其他示例按已有模块自动启用。没有桌面入口或 shell 启动包装。
 
 维护者在 PME 源码根目录运行 `python3 sdk/build_modular.py` 可重新打包；包使用者无需此脚本。模块选择、所有目标名、内存与坐标约定、GRE 对接方式见 `手册.md`。
+
+共享网格与索引位宽详见 docs/SHARED_MESH.md。分模块脚本可指定 --index-bits 16 或 32。

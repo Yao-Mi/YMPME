@@ -56,6 +56,13 @@ add_library(ympme STATIC
 	YMPME/CORE/YMPME_World.c
 	YMPME/DEBUG/YMPME_Debug.c)
 add_library(YMPME::ympme ALIAS ympme)
+set(YMPME_INDEX_BITS 32 CACHE STRING "PME collision mesh index width: 16 or 32")
+set_property(CACHE YMPME_INDEX_BITS PROPERTY STRINGS 16 32)
+if(NOT YMPME_INDEX_BITS STREQUAL "16" AND NOT YMPME_INDEX_BITS STREQUAL "32")
+    message(FATAL_ERROR "YMPME_INDEX_BITS must be 16 or 32")
+endif()
+target_compile_definitions(ympme PUBLIC YMPME_INDEX_BITS=${YMPME_INDEX_BITS})
+
 target_include_directories(ympme PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/YMPME>
     $<INSTALL_INTERFACE:include/YMPME>)

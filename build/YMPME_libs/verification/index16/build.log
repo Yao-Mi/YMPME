@@ -1,0 +1,190 @@
+
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/engine', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_POSITION_INDEPENDENT_CODE=ON', '-DYMPME_INSTALL_SDK=ON', '-DYMPME_BUILD_TESTS=OFF', '-DYMPME_BUILD_DEMOS=OFF', '-DYMPME_BUILD_GRE_BRIDGE=OFF', '-DYMPME_BUILD_GRE_DEMO=OFF', '-DYMPME_BUILD_ROPE_GRE=OFF', '-DYMPME_BUILD_HAND_BALL_DEMO=OFF', '-DYMPME_BUILD_HAND_SKIN_DEMO=OFF', '-DYMPME_ENABLE_SANITIZERS=OFF', '-DYMPME_FLIGHT_ROTORS=ON', '-DYMPME_FLIGHT_AERODYNAMICS=ON', '-DYMPME_ENABLE_RIGID=ON', '-DYMPME_ENABLE_JOINT=ON', '-DYMPME_ENABLE_DYNAMICS=ON', '-DYMPME_ENABLE_QUERY=ON', '-DYMPME_ENABLE_FLIGHT=ON', '-DYMPME_ENABLE_SOFTBODY=ON', '-DYMPME_MODEL_DRIVE=ON', '-DYMPME_MODEL_TERRAIN=ON', '-DYMPME_MODEL_SUSPENSION=ON', '-DYMPME_MODEL_VEHICLE=ON', '-DYMPME_MODEL_GEAR=ON', '-DYMPME_MODEL_BELT=ON', '-DYMPME_MODEL_PULLEY=ON', '-DYMPME_MODEL_ROPE=ON', '-DYMPME_MODEL_AIRCRAFT=ON', '-DYMPME_MODEL_PENDULUM=ON', '-DYMPME_MODEL_SURFACE_ATLAS=ON', '-DYMPME_MODEL_SKIN=ON', '-DYMPME_SENSOR_IMU=ON', '-DYMPME_SENSOR_ENCODER=ON', '-DYMPME_SENSOR_FORCE=ON', '-DYMPME_SENSOR_LASER=ON', '-DYMPME_SENSOR_LIDAR=ON', '-DYMPME_SENSOR_DEPTH=ON', '-DYMPME_SENSOR_TACTILE=ON', '-DYMPME_INDEX_BITS=16', '-DYMPME_SDK_UNIFIED=ON']
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/engine
+
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/engine', '--parallel', '4', '--target', 'ympme_unified']
+[  0%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CONFIG/YMPME_Mem.c.o
+[  2%] Building C object CMakeFiles/ympme_unified.dir/YMPME/OPOBJ/YMPME_Body.c.o
+[  5%] Building C object CMakeFiles/ympme_unified.dir/YMPME/OPOBJ/YMPME_Creat.c.o
+[  7%] Building C object CMakeFiles/ympme_unified.dir/YMPME/OPOBJ/YMPME_Free.c.o
+[  7%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/YMPME_Collision.c.o
+[ 10%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/YMPME_ConvexMesh.c.o
+[ 12%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/YMPME_MeshSAT.c.o
+[ 15%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/YMPME_Solver.c.o
+[ 17%] Building C object CMakeFiles/ympme_unified.dir/YMPME/DEBUG/YMPME_Debug.c.o
+[ 17%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/YMPME_World.c.o
+[ 20%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/RIGID/YMPME_Rigid.c.o
+[ 20%] Building C object CMakeFiles/ympme_unified.dir/YMPME/JOINT/YMPME_Joint.c.o
+[ 22%] Building C object CMakeFiles/ympme_unified.dir/YMPME/JOINT/YMPME_JointCache.c.o
+[ 30%] Building C object CMakeFiles/ympme_unified.dir/YMPME/DYNAMICS/YMPME_Dynamics.c.o
+[ 30%] Building C object CMakeFiles/ympme_unified.dir/YMPME/DYNAMICS/YMPME_Manifold.c.o
+[ 30%] Building C object CMakeFiles/ympme_unified.dir/YMPME/DYNAMICS/YMPME_ContactCache.c.o
+[ 30%] Building C object CMakeFiles/ympme_unified.dir/YMPME/DYNAMICS/YMPME_CCD.c.o
+[ 32%] Building C object CMakeFiles/ympme_unified.dir/YMPME/CORE/QUERY/YMPME_Query.c.o
+[ 32%] Building C object CMakeFiles/ympme_unified.dir/YMPME/EXT/FLIGHT/YMPME_Flight.c.o
+[ 35%] Building C object CMakeFiles/ympme_unified.dir/YMPME/EXT/FLIGHT/YMPME_Rotor.c.o
+[ 37%] Building C object CMakeFiles/ympme_unified.dir/YMPME/EXT/FLIGHT/YMPME_Aerodynamics.c.o
+[ 37%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/TERRAIN/YMPME_Terrain.c.o
+[ 40%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/DRIVE/YMPME_Drive.c.o
+[ 42%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SUSPENSION/YMPME_Suspension.c.o
+[ 45%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/VEHICLE/YMPME_Vehicle.c.o
+[ 45%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/GEAR/YMPME_Gear.c.o
+[ 50%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/GEAR/YMPME_GearCollision.c.o
+[ 50%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/BELT/YMPME_Belt.c.o
+[ 52%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/PULLEY/YMPME_Pulley.c.o
+[ 55%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/ROPE/YMPME_Rope.c.o
+[ 55%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/AIRCRAFT/YMPME_Aircraft.c.o
+[ 57%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/PENDULUM/YMPME_Pendulum.c.o
+[ 60%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SURFACE_ATLAS/YMPME_SurfaceAtlas.c.o
+[ 60%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SURFACE_ATLAS/YMPME_SurfaceAtlas_Compact.c.o
+[ 60%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SKIN/YMPME_SkinSelfContact.c.o
+[ 65%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SKIN/YMPME_SkinContact.c.o
+[ 65%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SURFACE_ATLAS/YMPME_TopologyGrid.c.o
+[ 67%] Building C object CMakeFiles/ympme_unified.dir/YMPME/MODEL/SKIN/YMPME_SkinPlane.c.o
+[ 70%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SOFTBODY/YMPME_SoftBall.c.o
+[ 72%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SOFTBODY/YMPME_SoftPad.c.o
+[ 72%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/YMPME_Sensor.c.o
+[ 75%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/YMPME_Signal.c.o
+[ 77%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/YMPME_Range.c.o
+[ 77%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/IMU/YMPME_IMU.c.o
+[ 80%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/IMU/YMPME_IMUDevice.c.o
+[ 82%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/ENCODER/YMPME_Encoder.c.o
+[ 85%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/FORCE/YMPME_ForceSensor.c.o
+[ 85%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/ENCODER/YMPME_EncoderDevice.c.o
+[ 90%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/LASER/YMPME_Laser.c.o
+[ 90%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/FORCE/YMPME_ForceDevice.c.o
+[ 90%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/LIDAR/YMPME_Lidar.c.o
+[ 95%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/DEPTH/YMPME_Depth.c.o
+[ 95%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/TACTILE/YMPME_Tactile.c.o
+[ 97%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/TACTILE/YMPME_TactileWindow.c.o
+[ 97%] Building C object CMakeFiles/ympme_unified.dir/YMPME/SENSOR/TACTILE/YMPME_SurfaceTactile.c.o
+[100%] Linking C static library unified/libympme.a
+[100%] Built target ympme_unified
+
+$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/engine', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs']
+-- Install configuration: "Release"
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/lib/libympme.a
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/RIGID
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/RIGID/YMPME_Rigid.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_World.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_ConvexMesh.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_Ray.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_MathBase.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_Feedback.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_MeshSAT.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/QUERY
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/QUERY/YMPME_Query.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_Surface.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_Solver.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CORE/YMPME_Collision.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/LIDAR
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/LIDAR/YMPME_Lidar.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/YMPME_RangeInternal.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/YMPME_Signal.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/TACTILE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/TACTILE/YMPME_TactileWindow.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/TACTILE/YMPME_SurfaceTactile.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/TACTILE/YMPME_Tactile.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/YMPME_Sensor.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/DEPTH
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/DEPTH/YMPME_Depth.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/LASER
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/LASER/YMPME_Laser.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/ENCODER
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/ENCODER/YMPME_EncoderDevice.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/ENCODER/YMPME_Encoder.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/IMU
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/IMU/YMPME_IMU.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/IMU/YMPME_IMUDevice.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/FORCE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/FORCE/YMPME_ForceSensor.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SENSOR/FORCE/YMPME_ForceDevice.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_PubDefine.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_Features.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_Mem.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_Index.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_PubType.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/PULLEY
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/PULLEY/YMPME_Pulley.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/BELT
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/BELT/YMPME_Belt.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/AIRCRAFT
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/AIRCRAFT/YMPME_Aircraft.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/DRIVE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/DRIVE/YMPME_Drive.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SURFACE_ATLAS
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SURFACE_ATLAS/YMPME_SurfaceAtlas.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SURFACE_ATLAS/YMPME_TopologyGrid.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SUSPENSION
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SUSPENSION/YMPME_Suspension.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/ROPE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/ROPE/YMPME_Rope.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SKIN
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SKIN/YMPME_SkinContact.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SKIN/YMPME_SkinSelfContact.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/SKIN/YMPME_SkinPlane.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/VEHICLE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/VEHICLE/YMPME_Vehicle.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/TERRAIN
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/TERRAIN/YMPME_Terrain.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/GEAR
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/GEAR/YMPME_Gear.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/PENDULUM
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/MODEL/PENDULUM/YMPME_Pendulum.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DYNAMICS
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DYNAMICS/YMPME_CCD.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DYNAMICS/YMPME_Dynamics.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DYNAMICS/YMPME_ContactCache.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DYNAMICS/YMPME_Manifold.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/YMPME.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/EXT
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/EXT/FLIGHT
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/EXT/FLIGHT/YMPME_Flight.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/IOFILE
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SOFTBODY
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SOFTBODY/YMPME_SoftPad.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/SOFTBODY/YMPME_SoftBall.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/OPOBJ
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/OPOBJ/YMPME_OBJ.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/OPOBJ/YMPME_Free.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/OPOBJ/YMPME_Creat.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/OPOBJ/YMPME_Body.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DEBUG
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/DEBUG/YMPME_Debug.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/JOINT
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/JOINT/YMPME_Joint.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_Features.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/YMPME.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/include/YMPME/CONFIG/YMPME_Index.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/cmake/YMPMETargets.cmake
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/cmake/YMPMETargets-release.cmake
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/cmake/YMPMEConfig.cmake
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/cmake/YMPMEConfigVersion.cmake
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/./README.md
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/./手册.md
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/docs/API.md
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/docs/ARCHITECTURE.md
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/docs/MESH_COLLISION.md
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/demo_sdk_shared_gre.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/demo_sdk_minimal.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/demo_sdk_encoder.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/CMakeLists.txt
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/demo_sdk_dynamics.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/demo_sdk_mesh_indices.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/gre/YMPME_GREMesh.c
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/examples/gre/YMPME_GREMesh.h
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/docs/SHARED_MESH.md

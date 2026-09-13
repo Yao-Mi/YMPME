@@ -40,22 +40,23 @@ def source_hash():
         h.update(p.relative_to(ROOT).as_posix().encode() + b"\0" + p.read_bytes() + b"\0")
     return h.hexdigest()
 
-def main(unified=False):
+def main(unified=False, argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     if not unified:
         parser.add_argument("--profile", choices=("full", "core"), default="full")
     else:
         parser.set_defaults(profile="full")
     parser.add_argument("--output", type=Path, default=ROOT / ("build/YMPME_libs" if unified else "build/YMPME_libs_modular"))
+    parser.add_argument("--index-bits", choices=(16,32), type=int, default=32)
     parser.add_argument("--jobs", type=int, default=4)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if args.jobs < 1:
         parser.error("--jobs must be positive")
     output = args.output.resolve()
     build_root = (ROOT / "build").resolve()
     if build_root not in output.parents or output == build_root / "sdk-work":
         parser.error("Publish to a dedicated directory under YMPME/build")
-    work = build_root / "sdk-work" / ("unified" if unified else "modular-" + args.profile)
+    work = build_root / "sdk-work" / (("unified" if unified else "modular-" + args.profile) + "-index" + str(args.index_bits))
     if output == work or output in work.parents or work in output.parents:
         parser.error("Output must be separate from sdk-work")
     if output.exists() and not (output / ".ympme-sdk").is_file():
@@ -73,6 +74,7 @@ def main(unified=False):
               "-DYMPME_BUILD_HAND_SKIN_DEMO=OFF", "-DYMPME_ENABLE_SANITIZERS=OFF",
               "-DYMPME_FLIGHT_ROTORS=ON", "-DYMPME_FLIGHT_AERODYNAMICS=ON"]
     config += [f"-DYMPME_{opt}={'ON' if args.profile == 'full' else 'OFF'}" for opt in MODULE_OPTIONS]
+    config.append(f"-DYMPME_INDEX_BITS={args.index_bits}")
     config.append(f"-DYMPME_SDK_UNIFIED={'ON' if unified else 'OFF'}")
     print(f"Building {'unified' if unified else args.profile} SDK in {work / 'engine'}", flush=True)
     run(config, build_log)
@@ -140,7 +142,7 @@ endif()
                 log = verify / "single-library-direct-link.log"
                 compiler_cache = (work / "engine/CMakeCache.txt").read_text()
                 cc = re.search(r"^CMAKE_C_COMPILER:FILEPATH=(.+)$", compiler_cache, re.M).group(1)
-                for name in ("demo_sdk_dynamics", "demo_sdk_encoder"):
+                for name in ("demo_sdk_dynamics", "demo_sdk_encoder", "demo_sdk_mesh_indices"):
                     exe = Path(relocated_dir) / (name + "-direct")
                     run([cc, "-std=c99", "-Wall", "-Wextra", "-Werror",
                          "-I", moved / "include/YMPME", moved / "examples" / (name + ".c"),
@@ -165,7 +167,7 @@ endif()
         version = re.search(r"project\(YMPME VERSION ([\d.]+)", (ROOT / "CMakeLists.txt").read_text()).group(1)
         info = {
             "version": version, "built_at_utc": datetime.now(timezone.utc).isoformat(),
-            "system": platform.system(), "machine": platform.machine(), "profile": args.profile, "layout": "unified" if unified else "modular",
+            "system": platform.system(), "machine": platform.machine(), "profile": args.profile, "layout": "unified" if unified else "modular", "index_bits": args.index_bits,
             "compiler": subprocess.check_output([compiler, "--version"], text=True).splitlines()[0],
             "build_type": "Release", "position_independent": True,
             "source_sha256": before, "static_libraries": sorted(p.name for p in (stage / "lib").glob("*.a")),

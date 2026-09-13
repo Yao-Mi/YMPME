@@ -69,6 +69,8 @@ Force 是累计量，不是每帧的持续属性。Advance 未产生物理子步
 
 ## GRE 适配
 
+下述 `YMPME_GRE_SyncObject` 是源码工程的旧姿态同步接口，不随一体 SDK 预编译交付。需要直接借用 GRE 几何时，使用 0.3.x 的共享接口，见下一节及 [SHARED_MESH.md](SHARED_MESH.md)。
+
 链接 `ympme_gre`，包含 `BRIDGE/YMPME_GRE.h`。创建网格后、第一次 LocalToWorld 前保存一份局部 `gre_vertex4d` 数组，保持该数组不可变且与目标顶点不重叠。
 
 ```c
@@ -78,6 +80,16 @@ YMPME_GRE_SyncObject(ball, greObject, localVertices, vertexCount,
 ```
 
 适配器写入主顶点、已存在的高级顶点 base、WorldCoordinate 及局部 AABB；保留法线/切线等高级属性。只支持正的均匀 object.scale，不负责旋转、法线旋转、碰撞尺寸同步、子网格链遍历或资源生命周期。渲染局部网格应以物理形状中心为原点。GRE 的临时普通顶点由渲染管线更新。
+
+## 0.3.x：共享几何与索引位宽
+
+- `PME_Index`：由 `YMPME_INDEX_BITS=16/32` 决定的无符号索引类型；`YMPME_ConvexMesh_Init` 的索引参数使用该类型。
+- `pme_mesh_view`：描述借用顶点地址、步长、xyz 偏移和米制缩放，以及连续索引或含索引指针的逐面记录。
+- `YMPME_ConvexMesh_InitView`：校验并绑定借用布局，不复制几何、不申请内存；由应用提供面轴、边轴缓存。失败保持输出 mesh 不变，但可能写入工作缓存。
+- `YMPME_ConvexMesh_Vertex` / `YMPME_ConvexMesh_Index`：统一读取连续或借用布局。仅在初始化成功、下标有效时调用；不要直接假定共享网格的 `.vertices` / `.indices` 非空。
+- `YMPME_GRE_Mesh_Bind` / `PrepareRender` / `Unbind`：应用侧 GRE 原生绑定，源码随 SDK 放在 `examples/gre/`，不编进 PME 静态库。
+
+一体 SDK 包默认 16 位，通过 `YMPME_INDEX_BITS` 选择同名位宽的完整库；源码独立构建默认 32 位。共享 GRE 时两库位宽一致。网格结构发生 ABI 变化，旧消费者需重新编译。几何与缓存必须在使用期间有效且保持不变；支持范围仍为闭合凸三角网格。完整调用、所有权和示例见 [SHARED_MESH.md](SHARED_MESH.md)。
 
 ## 0.2.0：凸 Mesh 与组过滤
 

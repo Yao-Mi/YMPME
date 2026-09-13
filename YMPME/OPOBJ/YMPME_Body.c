@@ -33,7 +33,7 @@ pme_result YMPME_Body_Init(PME_Body body, const pme_body_desc* d)
 	if (d->shape == PME_BOX && (!YMPME_VecFinite(d->halfExtents) ||
 		d->halfExtents.x <= 0 || d->halfExtents.y <= 0 || d->halfExtents.z <= 0))
 		return PME_INVALID_ARGUMENT;
-	if (d->shape == PME_CONVEX_MESH && (!d->mesh || !d->mesh->vertices || !YMPME_ConvexMesh_HasIndices(d->mesh) ||
+	if (d->shape == PME_CONVEX_MESH && (!d->mesh || !YMPME_ConvexMesh_HasVertices(d->mesh) || !YMPME_ConvexMesh_HasIndices(d->mesh) ||
 		!d->mesh->faceAxes || !d->mesh->edgeAxes || d->mesh->vertexCount < 4 ||
 		d->mesh->faceCount == 0 || d->mesh->edgeCount == 0 || !YMPME_Rotation_IsValid(d->rotation)))
 		return PME_INVALID_ARGUMENT;

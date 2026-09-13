@@ -100,12 +100,12 @@ static int mesh(const pme_ray *ray, const pme_body *b, float *distance, pme_vec3
 	int found = 0;
 	center = V(0, 0, 0);
 	for (i = 0; i < m->vertexCount; ++i)
-		center = ADD(center, SCALE(m->vertices[i], 1.f / (float)m->vertexCount));
+		center = ADD(center, SCALE(YMPME_ConvexMesh_Vertex(m,i), 1.f / (float)m->vertexCount));
 	for (i = 0; i < m->triangleCount; ++i)
 	{
-		pme_vec3 a = m->vertices[YMPME_ConvexMesh_Index(m,i * 3)],
-				 e1 = SUB(m->vertices[YMPME_ConvexMesh_Index(m,i * 3 + 1)], a),
-				 e2 = SUB(m->vertices[YMPME_ConvexMesh_Index(m,i * 3 + 2)], a);
+		pme_vec3 a = YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,i * 3)),
+				 e1 = SUB(YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,i * 3 + 1)), a),
+				 e2 = SUB(YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,i * 3 + 2)), a);
 		pme_vec3 p = CROSS(d, e2), v = SUB(o, a), q;
 		double det = DOT(e1, p), u, w, t;
 		double tolerance = 1e-8 * sqrt((double)DOT(e1, e1) * DOT(e2, e2));

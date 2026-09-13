@@ -91,8 +91,8 @@ static int valid(const pme_collider *c, const pme_dynamics *w)
 	if (c->type == PME_COLLIDER_MESH)
 	{
 		const pme_convex_mesh *m = c->mesh;
-		return m && m->vertices && YMPME_ConvexMesh_HasIndices(m) && m->faceAxes && m->edgeAxes &&
-			   m->vertexCount >= 4 && m->vertexCount <= UINT32_MAX && m->triangleCount >= 4 &&
+		return m && YMPME_ConvexMesh_HasVertices(m) && YMPME_ConvexMesh_HasIndices(m) && m->faceAxes && m->edgeAxes &&
+			   m->vertexCount >= 4 && m->vertexCount-1 <= YMPME_INDEX_MAX && m->triangleCount >= 4 &&
 			   m->triangleCount <= SIZE_MAX / 3 && m->faceCount > 0 && m->edgeCount > 0 &&
 			   YMPME_VecFinite(m->bounds.min) && YMPME_VecFinite(m->bounds.max) &&
 			   m->bounds.min.x <= m->bounds.max.x && m->bounds.min.y <= m->bounds.max.y &&

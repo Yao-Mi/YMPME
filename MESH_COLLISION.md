@@ -20,7 +20,7 @@ world.config.meshPrecision = 0; /* 涉及 Mesh 的配对采用 AABB 响应 */
 
 支持 Mesh–Mesh、Mesh–Box、Mesh–Sphere，含旋转、边角接触和完全包含。SAT 使用双方的面法线及边叉积；球体额外检查到三角形最近特征的方向。接触输出仍为法线和穿透深度，供现有平移求解器使用。
 
-凹网格、开口地形、平面三角片不属于这个凸体接口，初始化会拒绝。凹模型应离线拆成多个闭合凸零件并逐件检测；不会静默把凹模型当作凸包。没有自动凸分解、任意三角汤检测、BVH 或 CCD。新增 Mesh 姿态不代表已有角速度、角冲量或旋转刚体求解。
+凹网格、开口地形、平面三角片不属于这个凸体接口，初始化会拒绝。凹模型应离线拆成多个闭合凸零件并逐件检测；不会静默把凹模型当作凸包。基础凸体接口不提供自动凸分解、任意三角汤检测或 BVH。这里的基础 World 使用平移求解；三维旋转刚体、接触流形和可选的球体对静态形状 CCD 由 DYNAMICS 接口提供，不能把两个世界的数据结构混用。
 
 ## 构建与绑定
 
@@ -28,7 +28,7 @@ world.config.meshPrecision = 0; /* 涉及 Mesh 的配对采用 AABB 响应 */
 pme_convex_mesh mesh;
 pme_vec3 faceAxes[TRIANGLE_COUNT];
 pme_vec3 edgeAxes[TRIANGLE_COUNT * 3];
-/* vertices 是米制局部顶点；indices 是共享索引的三角列表。 */
+/* vertices 是米制局部顶点；indices 声明为 PME_Index[]，每三项一个三角。 */
 pme_result result = YMPME_ConvexMesh_Init(&mesh,
     vertices, VERTEX_COUNT, indices, TRIANGLE_COUNT,
     faceAxes, TRIANGLE_COUNT, edgeAxes, TRIANGLE_COUNT * 3);
@@ -43,7 +43,13 @@ PME_Body body = YMPME_World_AddBody(&world, &desc);
 
 四组数组和 `mesh` 都由应用持有；必须在 Body 使用期间保持有效且不修改，工作数组彼此也不能重叠。初始化验证有限坐标、索引、三角形面积、每条边恰有两个相邻面、凸性和非零体积；可以处理三角形绕序不统一，但相邻面必须共享顶点索引。失败不修改 mesh，但工作数组可能已被写入；不要拿仍被使用的 Mesh 缓存做失败试验。
 
-预计算时去重法线和边方向；检测时无堆分配。绑定多个实例可共享同一不可变 Mesh，但每个 Body 有独立 position 和 rotation。旋转矩阵的三列必须是右手正交单位基，可用 `YMPME_Rotation_Identity` 初始化、`YMPME_Body_SetRotation` 校验设置。没有隐式缩放，缩放需在绑定前应用到局部顶点。
+预计算时去重法线和边方向；检测时无堆分配。绑定多个实例可共享同一不可变 Mesh，但每个 Body 有独立 position 和 rotation。旋转矩阵的三列必须是右手正交单位基，可用 `YMPME_Rotation_Identity` 初始化、`YMPME_Body_SetRotation` 校验设置。连续数组 Init 没有隐式缩放；借用视图 InitView 可用固定的 vertexScale 在读取时换算为米。
+
+## 共享 GRE 网格（0.3.x）
+
+`YMPME_ConvexMesh_InitView` 支持借用带步长的顶点以及逐面索引指针，SAT、射线查询、接触流形和适用的 CCD 路径都通过统一访问器读取。`PME_Index` 随 16/32 位库编译；共享 GRE 时双方位宽一致，不进行索引格式转换。
+
+应用可编译 SDK 的 `examples/gre/YMPME_GREMesh.c`，直接借用 GRE 原始局部几何。显示变换使用 GRE 的工作顶点，仍需独立的碰撞轴缓存和面片工作记录。借用不改变凸体限制，也不自动迁移已有 Demo。绑定、源对象生命周期及释放顺序见 [SHARED_MESH.md](SHARED_MESH.md)。
 
 ## 组与装配体过滤
 

@@ -19,7 +19,7 @@ static void project(const pme_body* b,pme_vec3 axis,float* low,float* high)
 		*low=FLT_MAX; *high=-FLT_MAX;
 		for(i=0;i<d->mesh->vertexCount;++i)
 		{
-			float p=YMPME_VecDot(local,d->mesh->vertices[i])+center;
+			float p=YMPME_VecDot(local,YMPME_ConvexMesh_Vertex(d->mesh,i))+center;
 			*low=fminf(*low,p); *high=fmaxf(*high,p);
 		}
 	}
@@ -66,7 +66,7 @@ int YMPME_MeshSAT(const pme_body* a,const pme_body* b,pme_contact* contact)
 		for(i=0;i<m->triangleCount;++i)
 		{
 			pme_vec3 v[3],q;
-			for(j=0;j<3;++j) v[j]=YMPME_VecAdd(mesh->state.position,YMPME_Rotation_Apply(mesh->state.rotation,m->vertices[YMPME_ConvexMesh_Index(m,3*i+j)]));
+			for(j=0;j<3;++j) v[j]=YMPME_VecAdd(mesh->state.position,YMPME_Rotation_Apply(mesh->state.rotation,YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,3*i+j))));
 			q=YMPME_Triangle_ClosestPoint(sphere->state.position,v[0],v[1],v[2]);
 			if(!axisTest(a,b,YMPME_VecSub(q,sphere->state.position),&best)) return 0;
 		}

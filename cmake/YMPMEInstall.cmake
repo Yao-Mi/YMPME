@@ -58,6 +58,9 @@ if(YMPME_SDK_UNIFIED)
         string(REPLACE "=" ";" _pair "${_definition}")
         list(GET _pair 0 _key)
         list(GET _pair 1 _value)
+        if(_key STREQUAL "YMPME_INDEX_BITS")
+            continue()
+        endif()
         string(APPEND _feature_defaults
             "#ifndef ${_key}\n#define ${_key} ${_value}\n#elif ${_key} != ${_value}\n#error \"Unified SDK feature configuration mismatch: ${_key}\"\n#endif\n")
     endforeach()
@@ -83,6 +86,10 @@ if(YMPME_SDK_UNIFIED)
     install(FILES "${PROJECT_BINARY_DIR}/unified-headers/YMPME_Features.h" DESTINATION include/YMPME/CONFIG)
     install(FILES "${PROJECT_BINARY_DIR}/unified-headers/YMPME.h" DESTINATION include/YMPME)
 endif()
+file(READ "${PROJECT_SOURCE_DIR}/YMPME/CONFIG/YMPME_Index.h" _index_header)
+string(REPLACE "#define YMPME_INDEX_BITS 32" "#define YMPME_INDEX_BITS ${YMPME_INDEX_BITS}" _index_header "${_index_header}")
+file(WRITE "${PROJECT_BINARY_DIR}/YMPME_Index.h" "${_index_header}")
+install(FILES "${PROJECT_BINARY_DIR}/YMPME_Index.h" DESTINATION include/YMPME/CONFIG)
 install(EXPORT YMPMETargets NAMESPACE YMPME:: DESTINATION cmake)
 configure_package_config_file("${CMAKE_CURRENT_LIST_DIR}/YMPMEConfig.cmake.in"
     "${PROJECT_BINARY_DIR}/YMPMEConfig.cmake" INSTALL_DESTINATION cmake)
@@ -99,3 +106,9 @@ install(FILES "${PROJECT_SOURCE_DIR}/sdk/手册.md" DESTINATION .)
 install(FILES "${PROJECT_SOURCE_DIR}/API.md" "${PROJECT_SOURCE_DIR}/ARCHITECTURE.md"
     "${PROJECT_SOURCE_DIR}/MESH_COLLISION.md" DESTINATION docs)
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/sdk/examples/" DESTINATION examples)
+
+install(FILES "${PROJECT_SOURCE_DIR}/tests/test_mesh_indices.c" DESTINATION examples RENAME demo_sdk_mesh_indices.c)
+install(FILES "${PROJECT_SOURCE_DIR}/YMPME/BRIDGE/YMPME_GREMesh.c"
+    "${PROJECT_SOURCE_DIR}/YMPME/BRIDGE/YMPME_GREMesh.h" DESTINATION examples/gre)
+
+install(FILES "${PROJECT_SOURCE_DIR}/SHARED_MESH.md" DESTINATION docs)

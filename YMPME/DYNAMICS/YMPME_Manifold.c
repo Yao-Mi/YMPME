@@ -9,7 +9,7 @@
 #define dot YMPME_VecDot
 #define cross YMPME_VecCross
 static float norm(pme_vec3 p) { return sqrtf(dot(p, p)); }
-static const uint32_t boxIndices[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
+static const PME_Index boxIndices[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
 										2, 6, 7, 2, 7, 3, 0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6};
 typedef struct poly_
 {
@@ -33,7 +33,7 @@ static void makePoly(poly *p, const pme_collider *c, const pme_collision_pose *b
 		p->axes[2] = V(0, 0, 1);
 		p->box = (pme_convex_mesh){p->vertices, boxIndices, 8,
 								   12,			p->axes,	p->axes,
-								   3,			3,			{mul(c->halfSize, -1), c->halfSize}, NULL};
+								   3,			3,			{mul(c->halfSize, -1), c->halfSize}, {0}};
 		p->proxy.state.mesh = &p->box;
 	}
 	else
@@ -41,13 +41,13 @@ static void makePoly(poly *p, const pme_collider *c, const pme_collision_pose *b
 	const pme_convex_mesh *m = p->proxy.state.mesh;
 	pme_vec3 center = V(0, 0, 0);
 	for (size_t i = 0; i < m->vertexCount; ++i)
-		center = add(center, mul(m->vertices[i], 1.f / m->vertexCount));
+		center = add(center, mul(YMPME_ConvexMesh_Vertex(m,i), 1.f / m->vertexCount));
 	p->center = add(b->position, YMPME_Rotation_Apply(p->proxy.state.rotation, center));
 }
 static pme_vec3 vertex(const poly *p, size_t i)
 {
 	return add(p->proxy.state.position,
-			   YMPME_Rotation_Apply(p->proxy.state.rotation, p->proxy.state.mesh->vertices[i]));
+			   YMPME_Rotation_Apply(p->proxy.state.rotation, YMPME_ConvexMesh_Vertex(p->proxy.state.mesh,i)));
 }
 static pme_vec3 triangle(const poly *p, size_t i, pme_vec3 v[3])
 {

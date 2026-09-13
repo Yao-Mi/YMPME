@@ -1,4 +1,4 @@
-# Build trees and generated SDK packages (keep sdk/ source scripts)
+# Build trees (published SDK exception below; keep sdk/ source scripts)
 build/
 build-*/
 build_*/
@@ -23,7 +23,6 @@ rules.ninja
 
 # Compiled objects, libraries, executables and profiling data
 *.o
-*.obj
 *.a
 *.lib
 *.so
@@ -57,3 +56,9 @@ venv/
 ympme_ball_*.ppm
 .DS_Store
 Thumbs.db
+
+# Track the complete published SDK, including libraries, binaries and verification logs.
+!/build/
+/build/*
+!/build/YMPME_libs/
+!/build/YMPME_libs/**

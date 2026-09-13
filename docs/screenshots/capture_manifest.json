@@ -1,0 +1,184 @@
+{
+  "captured_on": "2026-09-14",
+  "environment": {
+    "YMGRE_HEADLESS": "1",
+    "YMGRE_WINDOW_SCALE": "1"
+  },
+  "capture": "GRE DemoHost / YMGUI_SHOT, complete last frame, BMP converted losslessly to RGB PNG",
+  "note": "Existing local executables, no rebuild. Their hashes identify the captured build; working-tree sources may have advanced. Frame count does not imply fixed simulation time.",
+  "images": [
+    {
+      "image": "gear_mesh.png",
+      "executable": "build/project_Demo/gear_mesh/demo_gear_mesh",
+      "arguments": [],
+      "max_frames": 90,
+      "binary_sha256": "7a76a1d9c7075133269d0dac757096cdfa6a59d3f4480b2cc0d5dbfc8099ef73",
+      "image_sha256": "e1964b796bc9824dcc8ac4dcccd74ee3496ae095b40f4d534aec4fa24afbe440"
+    },
+    {
+      "image": "tracked_vehicle.png",
+      "executable": "build/project_Demo/tracked_vehicle/demo_tracked_vehicle",
+      "arguments": [
+        "--crest"
+      ],
+      "max_frames": 100,
+      "binary_sha256": "c82404c35302f3228460fe6e2eb8baed30a88b0d5b5d6a341519dda188436fe1",
+      "image_sha256": "da6eca53e25bacf9c0aa0da6bc51e3402782cfa0ded7e5b9d6a8649ecd105ae4"
+    },
+    {
+      "image": "soft_finger.png",
+      "executable": "build/project_Demo/soft_finger/demo_soft_finger",
+      "arguments": [
+        "--snapshot"
+      ],
+      "max_frames": 3,
+      "binary_sha256": "cea0c49516133782e4c87a125bac687385b7e45a7a2b5bbd94b15e47c8bf46db",
+      "image_sha256": "fd0bd3bf03f7542a716b18772debf4eecec2a6a170326ebcc643f082036f8285"
+    },
+    {
+      "image": "hand_ball.png",
+      "executable": "build/project_Demo/hand_ball/demo_hand_ball",
+      "arguments": [],
+      "max_frames": 110,
+      "binary_sha256": "fd21390c5ce21ece3e872d76d3e77ce122c51fbac56cbe98316df950c3a05cc8",
+      "image_sha256": "d17cc594703f1a9ee489ebee68db9f90473fb57884b25eb509cdab936082c7b4"
+    },
+    {
+      "image": "human_ground.png",
+      "executable": "build/project_Demo/human_ground/demo_human_ground",
+      "arguments": [],
+      "max_frames": 130,
+      "binary_sha256": "777d689f762ac128d19ab196738bb43f971ef7797a2e08107d063bffd2164790",
+      "image_sha256": "054056134e07e0fd3e73649275d6c9e5059d0c7669aff2baa2b3471714617b2e"
+    },
+    {
+      "image": "owl_flight.png",
+      "executable": "build/project_Demo/owl_flight/demo_owl_flight",
+      "arguments": [],
+      "max_frames": 100,
+      "binary_sha256": "b95c9830639e59dc5bf46db233cfb59de5748aa7c45062e278d5057ff6b0ead7",
+      "image_sha256": "ae23786057dfc8cae193dbad52e141ac8287de073d96c4cefa3af1d59869fc84"
+    },
+    {
+      "image": "sensor_lab.png",
+      "executable": "build/project_Demo/sensor_lab/demo_sensor_lab",
+      "arguments": [],
+      "max_frames": 90,
+      "binary_sha256": "e2a065b8bc112ded0c428d0a5953c65ef86c06b574866b13e221e68a9585fe86",
+      "image_sha256": "3ac26259b39560021278eb1914e1094d894619609ca2d56d55686036c0f3163b"
+    },
+    {
+      "image": "flight_playground.png",
+      "executable": "build/project_Demo/flight_playground/demo_flight_playground",
+      "arguments": [],
+      "max_frames": 100,
+      "binary_sha256": "20ca6612364ca524eedecf36e3575b2e1aea6ce1c2db81b75be99b8f79f27a0d",
+      "image_sha256": "fb87e38a69b29fffdbf39f162ec3a93186b0ec2f98c023dcb34a583d141d8ac1"
+    },
+    {
+      "image": "vehicle_playground.png",
+      "executable": "build/project_Demo/vehicle_playground/demo_vehicle_playground",
+      "arguments": [],
+      "max_frames": 30,
+      "binary_sha256": "3b9ca5470e1443e0ebaf677f559e488a3eb0094b39eb7ee6785a3c4463b42696",
+      "image_sha256": "219734130b4cd6173d27dc2f71678ab07cf154faf809d20d4cf9361c47e74440"
+    },
+    {
+      "image": "track_lab.png",
+      "executable": "build/project_Demo/track_lab/demo_track_lab",
+      "arguments": [],
+      "max_frames": 120,
+      "binary_sha256": "b4aefd2077a3bb7589c7a0b75434234b392642f93c25bc9cdb454c73f6d4da2e",
+      "image_sha256": "72a288c84f0788f20d7f650bb2ca9a86fe0cca384e008d33f61ac51dafde68ff"
+    },
+    {
+      "image": "mechanisms.png",
+      "executable": "build/project_Demo/mechanisms/demo_mechanisms",
+      "arguments": [],
+      "max_frames": 100,
+      "binary_sha256": "25c5286fb1db99c4ddcba858c482f5f81d329d9bbb6c638c9c9f7cb9cb0122c6",
+      "image_sha256": "88a39cfbda37f316132167cf98f39379b36fc84e8267aa18828c33a6f4adab5b",
+      "capture_note": "默认四机构自动往返"
+    },
+    {
+      "image": "rope_lab.png",
+      "executable": "build/project_Demo/rope_lab/demo_rope_lab",
+      "arguments": [
+        "--smoke-test"
+      ],
+      "max_frames": 0,
+      "binary_sha256": "5d2fa038306258b8c266c0c91430f1cd2b0038f80057c5511bf1f24d7f6ce516",
+      "image_sha256": "27dd1be45d1ceed27f7d387a1d4f1eed6160189ddc51a34bed49d9e48dd72aa8",
+      "capture_note": "完整窗口自检在第 110 帧退出，截图为重置后再次释放的状态",
+      "exit_code": 0
+    },
+    {
+      "image": "joint_lab.png",
+      "executable": "build/project_Demo/joint_lab/demo_joint_lab",
+      "arguments": [],
+      "max_frames": 100,
+      "binary_sha256": "9a184e569e971cc77fc27dec8ba18f60931a191ef57a9aac4ae9756a8cf5350b",
+      "image_sha256": "4492db1279748b7217752cef0600070153f3e317b7cc4eed6bb747093fd4b54d",
+      "capture_note": "默认三类关节并行"
+    },
+    {
+      "image": "grasp_lab.png",
+      "executable": "build/project_Demo/grasp_lab/demo_grasp_lab",
+      "arguments": [
+        "--convex"
+      ],
+      "max_frames": 170,
+      "binary_sha256": "696f1eb8b202f4e51aac65961df7a111b2b2c463dedcbe124beb80705a55ec56",
+      "image_sha256": "d0fddab1f0feca2f13d6750eaf831837cb3f28099aeb23e41379ea579dfaca5b",
+      "capture_note": "自动夹持削角凸体"
+    },
+    {
+      "image": "human_skin.png",
+      "executable": "build/project_Demo/human_skin/demo_human_skin",
+      "arguments": [],
+      "max_frames": 85,
+      "binary_sha256": "30b8fbe6929cfe1446fd96a20eaa3e2141cf7145fe53c00680695ee4fab31e5f",
+      "image_sha256": "5859a3d267078551a6cd6cd3c6e0b5474a298fa1ffcba0c14c694a578305bda6",
+      "capture_note": "默认人体自接触与滑动"
+    },
+    {
+      "image": "hand_skin.png",
+      "executable": "build/project_Demo/hand_skin/demo_hand_skin",
+      "arguments": [],
+      "max_frames": 85,
+      "binary_sha256": "34d2db7f4d592f1ae79eb24066cf3df4e9d550f51f58058929ec45307548cd2f",
+      "image_sha256": "12cce56074925bf413867cdf6b393d91aa5a4c24c45fd53dd0ae430417897e47",
+      "capture_note": "默认掌心探头按压"
+    },
+    {
+      "image": "three_wheel_car.png",
+      "executable": "build/project_Demo/three_wheel_car/demo_three_wheel_car",
+      "arguments": [],
+      "max_frames": 20,
+      "binary_sha256": "6315a00a1cdcdf5e6c4a12c376a8c59d9628a70f14777104ea70c7529e39676f",
+      "image_sha256": "f36e256ab7735c3491d5ca48a2c2a7268ec8666eb7ab3bf11a13f7d116b4f595",
+      "capture_note": "默认驾驶场景"
+    },
+    {
+      "image": "gre_bouncing_ball.png",
+      "executable": "build/project_Demo/gre_bouncing_ball/demo_gre_bouncing_ball",
+      "arguments": [],
+      "max_frames": 35,
+      "binary_sha256": "cc50b9c18a95bbc5d4f1c3b756cff05b29623849c289898736975ce78adcf2ec",
+      "image_sha256": "02a7aa5e9eca29d22580d82c78413faebcf418bb65e75287ed9ec5f44bfe2470",
+      "capture_note": "默认重力弹跳"
+    },
+    {
+      "image": "ccd_lab.png",
+      "executable": "build/project_Demo/ccd_lab/demo_ccd_lab",
+      "arguments": [
+        "--smoke-test"
+      ],
+      "max_frames": 34,
+      "binary_sha256": "484c4864c514f44adc64681bf831876120bcc4879d6fb80bca4bbbac89bdb33d",
+      "image_sha256": "dcc21e159d238ba5bf72c763b1eb105e49442442815ef03c04897bccabde32ac",
+      "capture_note": "首个物理步后暂停；为截帧提前结束自检，不代表完整测试通过",
+      "exit_code": 1
+    }
+  ]
+}

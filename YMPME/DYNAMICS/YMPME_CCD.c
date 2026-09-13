@@ -207,8 +207,8 @@ static hit sweep(const pme_collider *c, const pme_rigid_body *body, pme_vec3 p, 
         if (!bounds(p, d, m->bounds.min, m->bounds.max, radius))
             return h;
         for (size_t k = 0; k < m->triangleCount; ++k)
-            triangle(&h, p, d, radius, m->vertices[YMPME_ConvexMesh_Index(m,3 * k)],
-                     m->vertices[YMPME_ConvexMesh_Index(m,3 * k + 1)], m->vertices[YMPME_ConvexMesh_Index(m,3 * k + 2)]);
+            triangle(&h, p, d, radius, YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,3 * k)),
+                     YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,3 * k + 1)), YMPME_ConvexMesh_Vertex(m,YMPME_ConvexMesh_Index(m,3 * k + 2)));
     }
     if (h.found)
         h.normal = unit(YMPME_Rotation_Apply(r, h.normal));
