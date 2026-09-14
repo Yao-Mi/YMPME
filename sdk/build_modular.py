@@ -32,8 +32,8 @@ def run(args, log):
         raise RuntimeError(f"Command failed; see {log}")
 
 def source_hash():
-    paths = [ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md"]
-    for folder in ("YMPME", "cmake", "sdk"):
+    paths = [ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md", ROOT / "SHARED_MESH.md"]
+    for folder in ("YMPME", "cmake", "sdk", "tests"):
         paths.extend(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
     h = hashlib.sha256()
     for p in sorted(paths):
@@ -49,6 +49,8 @@ def main(unified=False, argv=None):
     parser.add_argument("--output", type=Path, default=ROOT / ("build/YMPME_libs" if unified else "build/YMPME_libs_modular"))
     parser.add_argument("--index-bits", choices=(16,32), type=int, default=32)
     parser.add_argument("--jobs", type=int, default=4)
+    parser.add_argument("--build-type", choices=("Release", "RelWithDebInfo", "Debug"),
+                        default="Release", help="CMake build configuration; RelWithDebInfo keeps debug symbols")
     args = parser.parse_args(argv)
     if args.jobs < 1:
         parser.error("--jobs must be positive")
@@ -66,12 +68,13 @@ def main(unified=False, argv=None):
     build_log = work / "build.log"
     build_log.write_text("")
     before = source_hash()
-    config = ["cmake", "-S", ROOT, "-B", work / "engine", "-DCMAKE_BUILD_TYPE=Release",
+    config = ["cmake", "-S", ROOT, "-B", work / "engine", f"-DCMAKE_BUILD_TYPE={args.build_type}",
               "-DCMAKE_POSITION_INDEPENDENT_CODE=ON", "-DYMPME_INSTALL_SDK=ON",
               "-DYMPME_BUILD_TESTS=OFF", "-DYMPME_BUILD_DEMOS=OFF",
               "-DYMPME_BUILD_GRE_BRIDGE=OFF", "-DYMPME_BUILD_GRE_DEMO=OFF",
               "-DYMPME_BUILD_ROPE_GRE=OFF", "-DYMPME_BUILD_HAND_BALL_DEMO=OFF",
               "-DYMPME_BUILD_HAND_SKIN_DEMO=OFF", "-DYMPME_ENABLE_SANITIZERS=OFF",
+              "-DYMPME_ENABLE_LOGGING=ON", "-DYMPME_DEBUG_STDERR=ON", "-DYMPME_ENABLE_ASSERTS=OFF",
               "-DYMPME_FLIGHT_ROTORS=ON", "-DYMPME_FLIGHT_AERODYNAMICS=ON"]
     config += [f"-DYMPME_{opt}={'ON' if args.profile == 'full' else 'OFF'}" for opt in MODULE_OPTIONS]
     config.append(f"-DYMPME_INDEX_BITS={args.index_bits}")
@@ -95,7 +98,7 @@ def main(unified=False, argv=None):
             log = verify / "external-examples.log"
             print("Verifying relocated SDK examples (no engine sources)", flush=True)
             run(["cmake", "-S", moved / "examples", "-B", check_build,
-                 "-DCMAKE_BUILD_TYPE=Release", f"-DYMPME_DIR={moved / 'cmake'}"], log)
+                 f"-DCMAKE_BUILD_TYPE={args.build_type}", f"-DYMPME_DIR={moved / 'cmake'}"], log)
             run(["cmake", "--build", check_build, "--parallel", args.jobs], log)
             run(["ctest", "--test-dir", check_build, "--output-on-failure"], log)
             run(["cmake", "--install", check_build, "--prefix", stage], log)
@@ -142,7 +145,7 @@ endif()
                 log = verify / "single-library-direct-link.log"
                 compiler_cache = (work / "engine/CMakeCache.txt").read_text()
                 cc = re.search(r"^CMAKE_C_COMPILER:FILEPATH=(.+)$", compiler_cache, re.M).group(1)
-                for name in ("demo_sdk_dynamics", "demo_sdk_encoder", "demo_sdk_mesh_indices"):
+                for name in ("demo_sdk_dynamics", "demo_sdk_encoder", "demo_sdk_mesh_indices", "demo_sdk_debug"):
                     exe = Path(relocated_dir) / (name + "-direct")
                     run([cc, "-std=c99", "-Wall", "-Wextra", "-Werror",
                          "-I", moved / "include/YMPME", moved / "examples" / (name + ".c"),
@@ -169,12 +172,13 @@ endif()
             "version": version, "built_at_utc": datetime.now(timezone.utc).isoformat(),
             "system": platform.system(), "machine": platform.machine(), "profile": args.profile, "layout": "unified" if unified else "modular", "index_bits": args.index_bits,
             "compiler": subprocess.check_output([compiler, "--version"], text=True).splitlines()[0],
-            "build_type": "Release", "position_independent": True,
+            "build_type": args.build_type, "position_independent": True,
+            "debug_options": {"logging": True, "stderr": True, "asserts": False},
             "source_sha256": before, "static_libraries": sorted(p.name for p in (stage / "lib").glob("*.a")),
             "enabled_options": [opt for opt in MODULE_OPTIONS if args.profile == "full"],
             "graphics_dependencies": [], "requires_engine_source": False,
             "relocated_examples_passed": True, "all_modules_link_passed": True,
-            "rebuild_command": "python3 sdk/build.py" if unified else "python3 sdk/build_modular.py --profile " + args.profile,
+            "rebuild_command": ("python3 sdk/build.py" if unified else "python3 sdk/build_modular.py --profile " + args.profile) + f" --build-type {args.build_type}",
         }
         (stage / "BUILD_INFO.json").write_text(json.dumps(info, ensure_ascii=False, indent=2) + "\n")
         lines = [hashlib.sha256(p.read_bytes()).hexdigest() + "  " + p.relative_to(stage).as_posix()

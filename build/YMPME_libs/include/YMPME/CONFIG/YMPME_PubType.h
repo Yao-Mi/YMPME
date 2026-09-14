@@ -8,6 +8,8 @@ typedef enum pme_result_
 {
 	PME_OK = 0,
 	PME_INVALID_ARGUMENT = -1,
-	PME_CAPACITY_EXCEEDED = -2
+	PME_CAPACITY_EXCEEDED = -2,
+	PME_OUT_OF_MEMORY = -3, /* diagnostic for pointer-returning allocation APIs */
+	PME_ASSERTION_FAILED = -4 /* diagnostic before explicitly enabled assertion abort */
 } pme_result;
 #endif

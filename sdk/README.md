@@ -44,8 +44,18 @@ cmake --build examples-build
 ctest --test-dir examples-build --output-on-failure
 ```
 
-核心裁剪包提供自由落体和共享网格索引示例；其他示例按已有模块自动启用。没有桌面入口或 shell 启动包装。
+核心裁剪包提供自由落体、共享网格索引和日志示例；其他示例按已有模块自动启用。没有桌面入口或 shell 启动包装。
 
 维护者在 PME 源码根目录运行 `python3 sdk/build_modular.py` 可重新打包；包使用者无需此脚本。模块选择、所有目标名、内存与坐标约定、GRE 对接方式见 `手册.md`。
 
 共享网格与索引位宽详见 docs/SHARED_MESH.md。分模块脚本可指定 --index-bits 16 或 32。
+
+日志接口与编译开关见 [DEBUG 说明](docs/DEBUG.md)，默认 WARNING/ERROR 输出到 stderr，普通错误不终止进程。
+
+## 带调试信息构建
+
+`python3 sdk/build.py --build-type RelWithDebInfo` 生成保留优化和源码级调试信息的一体 SDK；
+`--build-type Debug` 适合单步调试，省略参数仍为 `Release`。分模块入口也支持此参数。
+构建类型记录在 `BUILD_INFO.json` 中。日志和断言开关独立于调试符号。
+调试库内部源码时需保留对应版本的源码；在其他机器可用调试器配置源码路径映射。
+外部依赖保留各自的构建配置，不会因此自动获得调试符号。

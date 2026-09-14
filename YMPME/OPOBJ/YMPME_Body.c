@@ -1,3 +1,4 @@
+#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_Body.h"
 #include "../CORE/YMPME_MathBase.h"
 #include <string.h>
@@ -25,18 +26,18 @@ pme_result YMPME_Body_Init(PME_Body body, const pme_body_desc* d)
 		!isfinite(d->restitution) || d->restitution < 0 || d->restitution > 1 ||
 		!isfinite(d->friction) || d->friction < 0 ||
 		!isfinite(d->linearDamping) || d->linearDamping < 0)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid body pointer, type, shape, collision group or material/state values");
 	if (d->type == PME_DYNAMIC && (!isfinite(d->mass) || d->mass <= 0 || !isfinite(1.0f/d->mass)))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Dynamic mass and its reciprocal must be finite and positive");
 	if (d->shape == PME_SPHERE && (!isfinite(d->radius) || d->radius <= 0))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Sphere radius must be finite and positive");
 	if (d->shape == PME_BOX && (!YMPME_VecFinite(d->halfExtents) ||
 		d->halfExtents.x <= 0 || d->halfExtents.y <= 0 || d->halfExtents.z <= 0))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Box half extents must be finite and positive");
 	if (d->shape == PME_CONVEX_MESH && (!d->mesh || !YMPME_ConvexMesh_HasVertices(d->mesh) || !YMPME_ConvexMesh_HasIndices(d->mesh) ||
 		!d->mesh->faceAxes || !d->mesh->edgeAxes || d->mesh->vertexCount < 4 ||
 		d->mesh->faceCount == 0 || d->mesh->edgeCount == 0 || !YMPME_Rotation_IsValid(d->rotation)))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh must be initialized and rotation must be orthonormal");
 	memset(&value, 0, sizeof(value));
 	value.state = *d;
 	value.previousPosition = d->position;
@@ -47,29 +48,29 @@ pme_result YMPME_Body_Init(PME_Body body, const pme_body_desc* d)
 }
 pme_result YMPME_Body_AddForce(PME_Body body, pme_vec3 force)
 {
-	if (!body || !body->active || !YMPME_VecFinite(force)) return PME_INVALID_ARGUMENT;
+	if (!body || !body->active || !YMPME_VecFinite(force)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Force requires an active body and finite vector");
 	if (body->state.type == PME_DYNAMIC)
 	{
 		pme_vec3 sum = YMPME_VecAdd(body->force, force);
-		if (!YMPME_VecFinite(sum)) return PME_INVALID_ARGUMENT;
+		if (!YMPME_VecFinite(sum)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Accumulated force overflow");
 		body->force = sum;
 	}
 	return PME_OK;
 }
 pme_result YMPME_Body_AddImpulse(PME_Body body, pme_vec3 impulse)
 {
-	if (!body || !body->active || !YMPME_VecFinite(impulse)) return PME_INVALID_ARGUMENT;
+	if (!body || !body->active || !YMPME_VecFinite(impulse)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Impulse requires an active body and finite vector");
 	if (body->state.type == PME_DYNAMIC)
 	{
 		pme_vec3 v = YMPME_VecAdd(body->state.velocity, YMPME_VecScale(impulse, body->inverseMass));
-		if (!YMPME_VecFinite(v)) return PME_INVALID_ARGUMENT;
+		if (!YMPME_VecFinite(v)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Impulse velocity overflow");
 		body->state.velocity = v;
 	}
 	return PME_OK;
 }
 pme_result YMPME_Body_SetPosition(PME_Body body, pme_vec3 p)
 {
-	if (!body || !body->active || !YMPME_VecFinite(p)) return PME_INVALID_ARGUMENT;
+	if (!body || !body->active || !YMPME_VecFinite(p)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Position requires an active body and finite vector");
 	body->state.position = body->previousPosition = p;
 	return PME_OK;
 }
@@ -84,7 +85,7 @@ pme_vec3 YMPME_Body_InterpolatedPosition(const pme_body* body, float alpha)
 
 pme_result YMPME_Body_SetRotation(PME_Body body, pme_rotation rotation)
 {
-	if (!body || !body->active || !YMPME_Rotation_IsValid(rotation)) return PME_INVALID_ARGUMENT;
+	if (!body || !body->active || !YMPME_Rotation_IsValid(rotation)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Rotation requires an active body and orthonormal basis");
 	body->state.rotation = rotation;
 	return PME_OK;
 }

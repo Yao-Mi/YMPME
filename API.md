@@ -128,3 +128,9 @@ World 默认 `meshPrecision=1`；涉及 Mesh 的配对可以切换为 AABB 模�
 ## 曲面皮肤反馈
 
 `MODEL/SKIN/YMPME_SkinContact.h` 是可选的采样曲面与球形压头接触模型，`SENSOR/TACTILE/YMPME_SurfaceTactile.h` 是独立曲面压力/剪切力读出接口；共享CORE的SI曲面采样协议。两者均无SKE/GRE依赖。见[低模手实验台](project_Demo/hand_skin/README.md)和[接触模型](YMPME/MODEL/SKIN/README.md)。
+
+## 0.3.1：日志诊断
+
+`DEBUG/YMPME_Log.h` 提供 `YMPME_LOG`、`YMPME_REPORT`、`YMPME_ASSERT`，以及 SetLogger、ResetLogger、Log、Report、ResultString、LevelString 和 AssertFail 接口（函数前缀均为 `YMPME_Debug_`）。默认 WARNING/ERROR 输出至 stderr，普通日志不终止进程；断言单独编译控制，默认关闭。源代码详见 `YMPME/DEBUG/README.md`，SDK 中对应文档为 `docs/DEBUG.md`。
+
+日志只补充诊断，原有返回值和状态修改规则保持不变。当前重点覆盖物体、基础世界、凸网格、动力学步进和 GRE 共享绑定错误；不是所有传感器/模型接口都已接入。配置是库级别的，仿真运行前设置，不能并发修改；回调同步消费借用记录，禁止重入日志。

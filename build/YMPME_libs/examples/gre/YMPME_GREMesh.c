@@ -1,3 +1,4 @@
+#include "DEBUG/YMPME_Log.h"
 #include "YMPME_GREMesh.h"
 #include "CORE/YMPME_MathBase.h"
 #include <stddef.h>
@@ -8,9 +9,9 @@ pme_result YMPME_GRE_Mesh_Bind(pme_gre_mesh* b,GRE_Object4d o,float units,
     if(!b||!o||!o->pointList||!o->pointList_||o->pointList==o->pointList_||
         !o->polygonList||!rf||rf==o->polygonList||o->pointNum<4||o->polygonNum<4||
         nr<(size_t)o->polygonNum||!isfinite(units)||units<=0||
-        !isfinite(o->scale)||o->scale<=0) return PME_INVALID_ARGUMENT;
+        !isfinite(o->scale)||o->scale<=0) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid GRE source, work buffers, capacities or scale");
     for(int i=0;i<o->polygonNum;++i)
-        if(o->polygonList[i].num!=3||!o->polygonList[i].index) return PME_INVALID_ARGUMENT;
+        if(o->polygonList[i].num!=3||!o->polygonList[i].index) return YMPME_REPORT(PME_INVALID_ARGUMENT, "GRE mesh must contain indexed triangles");
     pme_mesh_view view={o->pointList,(size_t)o->pointNum,sizeof(gre_vertex4d),
         offsetof(gre_vertex4d,pos),o->scale/units,NULL,o->polygonList,
         (size_t)o->polygonNum,sizeof(gre_polygon4d),offsetof(gre_polygon4d,index)};
@@ -24,11 +25,11 @@ pme_result YMPME_GRE_Mesh_Bind(pme_gre_mesh* b,GRE_Object4d o,float units,
 pme_result YMPME_GRE_Mesh_PrepareRender(pme_gre_mesh* b,pme_vec3 position,pme_rotation rotation)
 {
     if(!b||!b->source||!YMPME_VecFinite(position)||!YMPME_Rotation_IsValid(rotation))
-        return PME_INVALID_ARGUMENT;
+        return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid shared binding, position or rotation");
     GRE_Object4d o=b->source;
     if(o->pointList!=b->mesh.view.vertices||o->polygonList!=b->mesh.view.triangles||
         o->pointList_!=b->workVertices||o->pointNum!=(int)b->mesh.vertexCount||
-        o->polygonNum!=(int)b->mesh.triangleCount||o->scale!=b->sourceScale) return PME_INVALID_ARGUMENT;
+        o->polygonNum!=(int)b->mesh.triangleCount||o->scale!=b->sourceScale) return YMPME_REPORT(PME_INVALID_ARGUMENT, "GRE source buffers, counts or scale changed after binding");
     pme_vec3 translation=YMPME_VecScale(position,b->unitsPerMeter);
     for(int i=0;i<o->pointNum;++i) {
         pme_vec3 local=YMPME_ConvexMesh_Vertex(&b->mesh,(size_t)i);

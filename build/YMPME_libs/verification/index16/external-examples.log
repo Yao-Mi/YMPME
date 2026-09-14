@@ -1,5 +1,5 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build', '-DCMAKE_BUILD_TYPE=Release', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/cmake']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/cmake']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -8,41 +8,47 @@ $ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/reloc
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build', '--parallel', '4']
-[ 50%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
-[ 50%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
-[ 50%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
-[ 50%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
-[ 62%] Linking C executable bin/demo_sdk_encoder
-[ 62%] Built target demo_sdk_encoder
-[100%] Linking C executable bin/demo_sdk_dynamics
-[100%] Linking C executable bin/demo_sdk_minimal
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build', '--parallel', '4']
+[ 40%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
+[ 40%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[ 40%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
+[ 40%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
+[ 80%] Linking C executable bin/demo_sdk_minimal
+[ 70%] Linking C executable bin/demo_sdk_encoder
+[ 80%] Linking C executable bin/demo_sdk_dynamics
+[ 80%] Linking C executable bin/demo_sdk_debug
+[ 80%] Built target demo_sdk_minimal
+[ 80%] Built target demo_sdk_debug
+[ 80%] Built target demo_sdk_dynamics
+[ 80%] Built target demo_sdk_encoder
+[ 90%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
 [100%] Linking C executable bin/demo_sdk_mesh_indices
-[100%] Built target demo_sdk_minimal
-[100%] Built target demo_sdk_dynamics
 [100%] Built target demo_sdk_mesh_indices
 
-$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build', '--output-on-failure']
-Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build
-Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build
+$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build', '--output-on-failure']
+Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build
+Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build
     Start 1: demo_sdk_minimal
-1/4 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
-    Start 2: demo_sdk_dynamics
-2/4 Test #2: demo_sdk_dynamics ................   Passed    0.01 sec
-    Start 3: demo_sdk_encoder
-3/4 Test #3: demo_sdk_encoder .................   Passed    0.00 sec
-    Start 4: demo_sdk_mesh_indices
-4/4 Test #4: demo_sdk_mesh_indices ............   Passed    0.02 sec
+1/5 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
+    Start 2: demo_sdk_debug
+2/5 Test #2: demo_sdk_debug ...................   Passed    0.00 sec
+    Start 3: demo_sdk_dynamics
+3/5 Test #3: demo_sdk_dynamics ................   Passed    0.01 sec
+    Start 4: demo_sdk_encoder
+4/5 Test #4: demo_sdk_encoder .................   Passed    0.00 sec
+    Start 5: demo_sdk_mesh_indices
+5/5 Test #5: demo_sdk_mesh_indices ............   Passed    0.02 sec
 
-100% tests passed, 0 tests failed out of 4
+100% tests passed, 0 tests failed out of 5
 
-Total Test time (real) =   0.03 sec
+Total Test time (real) =   0.04 sec
 
-$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs']
--- Install configuration: "Release"
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/bin/demo_sdk_minimal
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/bin/demo_sdk_dynamics
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/bin/demo_sdk_encoder
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-mk_8vkwh/YMPME_libs/bin/demo_sdk_mesh_indices
+$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs']
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs/bin/demo_sdk_minimal
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs/bin/demo_sdk_debug
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs/bin/demo_sdk_dynamics
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs/bin/demo_sdk_encoder
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index16/.ympme-sdk-stage-8tx_z3vh/YMPME_libs/bin/demo_sdk_mesh_indices

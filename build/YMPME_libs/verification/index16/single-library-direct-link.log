@@ -1,17 +1,30 @@
 
-$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/examples/demo_sdk_dynamics.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_dynamics-direct']
+$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/examples/demo_sdk_dynamics.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_dynamics-direct']
 
-$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_dynamics-direct']
+$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_dynamics-direct']
 Sphere: y=0.49990 m, support=9.81000 N
 PASS: rigid contact and force feedback without a sensor module
 
-$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/examples/demo_sdk_encoder.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_encoder-direct']
+$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/examples/demo_sdk_encoder.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_encoder-direct']
 
-$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_encoder-direct']
+$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_encoder-direct']
 last=65530 now=5 delta=11 accumulated=65541
 PASS: uint16 encoder wrap (inter-sample motion must be less than half a turn)
 
-$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/examples/demo_sdk_mesh_indices.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_mesh_indices-direct']
+$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/examples/demo_sdk_mesh_indices.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_mesh_indices-direct']
 
-$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK 4fknd_b5/demo_sdk_mesh_indices-direct']
+$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_mesh_indices-direct']
+[PME ERROR] Invalid argument (-1): Invalid shared vertex layout, scale, index representation or counts [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:99 YMPME_ConvexMesh_InitView]
+[PME ERROR] Invalid argument (-1): Invalid shared vertex layout, scale, index representation or counts [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:99 YMPME_ConvexMesh_InitView]
+[PME ERROR] Invalid argument (-1): Invalid shared vertex layout, scale, index representation or counts [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:99 YMPME_ConvexMesh_InitView]
+[PME ERROR] Invalid argument (-1): Invalid shared vertex layout, scale, index representation or counts [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:99 YMPME_ConvexMesh_InitView]
+[PME ERROR] Invalid argument (-1): Shared triangle has a null index pointer [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:108 YMPME_ConvexMesh_InitView]
+[PME ERROR] Invalid argument (-1): Triangle index is outside the vertex array [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:52 initMesh]
+[PME ERROR] Invalid argument (-1): Invalid mesh output, axis buffers or vertex/triangle counts [/home/yaomi/文档/YMPME/YMPME/CORE/YMPME_ConvexMesh.c:40 initMesh]
 PASS index16: borrowed vertices/face indices, SAT, query, dynamics, CCD and index boundaries
+
+$ ['/usr/bin/cc', '-std=c99', '-Wall', '-Wextra', '-Werror', '-I', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/examples/demo_sdk_debug.c', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/YMPME_libs/lib/libympme.a', '-lm', '-o', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_debug-direct']
+
+$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index16/relocated SDK tgpvc0uy/demo_sdk_debug-direct']
+[ERROR] Invalid argument: Dynamic mass and its reciprocal must be finite and positive (/home/yaomi/文档/YMPME/YMPME/OPOBJ/YMPME_Body.c:31 YMPME_Body_Init)
+PASS diagnostics: error returned without exiting; corrected input succeeds

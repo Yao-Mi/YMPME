@@ -90,6 +90,13 @@ file(READ "${PROJECT_SOURCE_DIR}/YMPME/CONFIG/YMPME_Index.h" _index_header)
 string(REPLACE "#define YMPME_INDEX_BITS 32" "#define YMPME_INDEX_BITS ${YMPME_INDEX_BITS}" _index_header "${_index_header}")
 file(WRITE "${PROJECT_BINARY_DIR}/YMPME_Index.h" "${_index_header}")
 install(FILES "${PROJECT_BINARY_DIR}/YMPME_Index.h" DESTINATION include/YMPME/CONFIG)
+file(READ "${PROJECT_SOURCE_DIR}/YMPME/CONFIG/YMPME_DebugConfig.h" _debug_header)
+foreach(_debug_option ENABLE_LOGGING DEBUG_STDERR ENABLE_ASSERTS)
+    string(REGEX REPLACE "#define PME_${_debug_option} [01]"
+        "#define PME_${_debug_option} ${PME_${_debug_option}_VALUE}" _debug_header "${_debug_header}")
+endforeach()
+file(WRITE "${PROJECT_BINARY_DIR}/YMPME_DebugConfig.h" "${_debug_header}")
+install(FILES "${PROJECT_BINARY_DIR}/YMPME_DebugConfig.h" DESTINATION include/YMPME/CONFIG)
 install(EXPORT YMPMETargets NAMESPACE YMPME:: DESTINATION cmake)
 configure_package_config_file("${CMAKE_CURRENT_LIST_DIR}/YMPMEConfig.cmake.in"
     "${PROJECT_BINARY_DIR}/YMPMEConfig.cmake" INSTALL_DESTINATION cmake)
@@ -112,3 +119,4 @@ install(FILES "${PROJECT_SOURCE_DIR}/YMPME/BRIDGE/YMPME_GREMesh.c"
     "${PROJECT_SOURCE_DIR}/YMPME/BRIDGE/YMPME_GREMesh.h" DESTINATION examples/gre)
 
 install(FILES "${PROJECT_SOURCE_DIR}/SHARED_MESH.md" DESTINATION docs)
+install(FILES "${PROJECT_SOURCE_DIR}/YMPME/DEBUG/README.md" DESTINATION docs RENAME DEBUG.md)

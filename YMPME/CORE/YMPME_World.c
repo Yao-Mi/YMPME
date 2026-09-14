@@ -1,3 +1,4 @@
+#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_World.h"
 #include "YMPME_MathBase.h"
 #include "YMPME_Solver.h"
@@ -34,7 +35,7 @@ pme_result YMPME_World_Init(PME_World w, PME_Body storage, size_t capacity,
 {
 	pme_world_desc d = desc ? *desc : YMPME_World_DefaultDesc();
 	if (!w || !storage || !capacity || capacity > SIZE_MAX / sizeof(*storage) || !validConfig(&d))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid world, storage, capacity or world configuration");
 	memset(w, 0, sizeof(*w));
 	memset(storage, 0, capacity * sizeof(*storage));
 	w->config = d;
@@ -50,8 +51,10 @@ pme_result YMPME_World_Init(PME_World w, PME_Body storage, size_t capacity,
 PME_Body YMPME_World_AddBody(PME_World w, const pme_body_desc *desc)
 {
 	size_t i;
-	if (!validWorld(w))
+	if (!validWorld(w)) {
+		YMPME_LOG(PME_LOG_ERROR, PME_INVALID_ARGUMENT, "AddBody requires a valid world");
 		return NULL;
+	}
 	for (i = 0; i < w->capacity; ++i)
 	{
 		if (!w->bodies[i].active)
@@ -62,13 +65,14 @@ PME_Body YMPME_World_AddBody(PME_World w, const pme_body_desc *desc)
 			return &w->bodies[i];
 		}
 	}
+	YMPME_LOG(PME_LOG_ERROR, PME_CAPACITY_EXCEEDED, "World has no free body slots");
 	return NULL;
 }
 pme_result YMPME_World_RemoveBody(PME_World w, PME_Body body)
 {
 	size_t i;
 	if (!validWorld(w) || !body)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "RemoveBody requires a valid world and body");
 	/* 指针相等比较，避免对不属于该数组的指针做关系比较。 */
 	for (i = 0; i < w->capacity; ++i)
 	{
@@ -79,7 +83,7 @@ pme_result YMPME_World_RemoveBody(PME_World w, PME_Body body)
 			return PME_OK;
 		}
 	}
-	return PME_INVALID_ARGUMENT;
+	return YMPME_REPORT(PME_INVALID_ARGUMENT, "Body is inactive or does not belong to this world");
 }
 static void clearForces(PME_World w)
 {
@@ -163,7 +167,7 @@ static void stepWorld(PME_World w, float dt, pme_world_feedback *feedback)
 pme_result YMPME_World_Step(PME_World w, float dt)
 {
 	if (!validWorld(w) || !isfinite(dt) || dt <= 0)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Step requires a valid world and finite positive timestep");
 	memset(&w->collisionStats, 0, sizeof(w->collisionStats));
 	stepWorld(w, dt, NULL);
 	clearForces(w);
@@ -174,7 +178,7 @@ int YMPME_World_Advance(PME_World w, float frameTime)
 	unsigned steps = 0;
 	double dt;
 	if (!validWorld(w) || !isfinite(frameTime) || frameTime < 0)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Advance requires a valid world and finite nonnegative frame time");
 	memset(&w->collisionStats, 0, sizeof(w->collisionStats));
 	dt = w->config.fixedStep;
 	w->accumulator += frameTime;
@@ -203,7 +207,7 @@ float YMPME_World_InterpolationAlpha(const pme_world *w)
 pme_result YMPME_World_Destroy(PME_World w)
 {
 	if (!validWorld(w) || w->ownsMemory)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Destroy requires a valid caller-owned world; use Free for allocated worlds");
 	memset(w->bodies, 0, w->capacity * sizeof(*w->bodies));
 	memset(w, 0, sizeof(*w));
 	return PME_OK;
@@ -212,7 +216,7 @@ pme_result YMPME_World_Destroy(PME_World w)
 pme_result YMPME_World_SetGroupCollision(PME_World w, uint32_t a, uint32_t b, int enabled)
 {
 	if (!validWorld(w) || a >= 32 || b >= 32)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Collision group indices must be in 0..31 and world must be valid");
 	if (enabled)
 	{
 		w->groupMasks[a] |= UINT32_C(1) << b;
@@ -240,7 +244,7 @@ pme_result YMPME_World_StepWithFeedback(PME_World w, float dt, pme_world_feedbac
 {
 	if (!validWorld(w) || !isfinite(dt) || dt <= 0 || !f || !isfinite(f->time) || f->time < 0 ||
 		!f->states || f->stateCapacity < w->capacity || (f->contactCapacity && !f->contacts))
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid feedback buffers, capacities, time, world or timestep");
 	f->count = f->dropped = 0;
     f->stateCount=w->capacity;
 	f->interval = dt;

@@ -1,3 +1,4 @@
+#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_ConvexMesh.h"
 #include "YMPME_MathBase.h"
 #include <string.h>
@@ -36,30 +37,30 @@ static pme_result initMesh(pme_convex_mesh* mesh,pme_convex_mesh m,
 	size_t i,j,k;
     const size_t nv=m.vertexCount,nt=m.triangleCount;
     if(!mesh||!faces||!edges||nv<4||nv-1>YMPME_INDEX_MAX||nt<4||nt>SIZE_MAX/(3*sizeof(PME_Index)))
-        return PME_INVALID_ARGUMENT;
+        return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid mesh output, axis buffers or vertex/triangle counts");
     m.bounds.min=m.bounds.max=YMPME_ConvexMesh_Vertex(&m,0);
 	for(i=0;i<nv;++i)
 	{
-		if(!YMPME_VecFinite(YMPME_ConvexMesh_Vertex(&m,i))) return PME_INVALID_ARGUMENT;
+		if(!YMPME_VecFinite(YMPME_ConvexMesh_Vertex(&m,i))) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh contains a non-finite vertex");
 		center=YMPME_VecAdd(center,YMPME_VecScale(YMPME_ConvexMesh_Vertex(&m,i),1.0f/(float)nv));
 		m.bounds.min=YMPME_Vec3(fminf(m.bounds.min.x,YMPME_ConvexMesh_Vertex(&m,i).x),fminf(m.bounds.min.y,YMPME_ConvexMesh_Vertex(&m,i).y),fminf(m.bounds.min.z,YMPME_ConvexMesh_Vertex(&m,i).z));
 		m.bounds.max=YMPME_Vec3(fmaxf(m.bounds.max.x,YMPME_ConvexMesh_Vertex(&m,i).x),fmaxf(m.bounds.max.y,YMPME_ConvexMesh_Vertex(&m,i).y),fmaxf(m.bounds.max.z,YMPME_ConvexMesh_Vertex(&m,i).z));
 	}
 	scale=sqrtf(YMPME_VecDot(YMPME_VecSub(m.bounds.max,m.bounds.min),YMPME_VecSub(m.bounds.max,m.bounds.min)));
-	if(!isfinite(scale)||scale<1e-6f) return PME_INVALID_ARGUMENT;
+	if(!isfinite(scale)||scale<1e-6f) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh bounds are degenerate or overflow");
 	tolerance=scale*1e-5f;
-	for(i=0;i<nt*3;++i) if(YMPME_ConvexMesh_Index(&m,i)>=nv) return PME_INVALID_ARGUMENT;
+	for(i=0;i<nt*3;++i) if(YMPME_ConvexMesh_Index(&m,i)>=nv) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Triangle index is outside the vertex array");
 	for(i=0;i<nt;++i)
 	{
 		pme_vec3 a=YMPME_ConvexMesh_Vertex(&m,YMPME_ConvexMesh_Index(&m,3*i)),b=YMPME_ConvexMesh_Vertex(&m,YMPME_ConvexMesh_Index(&m,3*i+1)),c=YMPME_ConvexMesh_Vertex(&m,YMPME_ConvexMesh_Index(&m,3*i+2));
 		pme_vec3 n=YMPME_VecCross(YMPME_VecSub(b,a),YMPME_VecSub(c,a));
 		float length=sqrtf(YMPME_VecDot(n,n));
-		if(!isfinite(length)||length<scale*scale*1e-9f) return PME_INVALID_ARGUMENT;
+		if(!isfinite(length)||length<scale*scale*1e-9f) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Triangle is degenerate or overflows");
 		n=YMPME_VecScale(n,1/length);
 		if(YMPME_VecDot(n,YMPME_VecSub(center,a))>0) n=YMPME_VecScale(n,-1);
-		for(j=0;j<nv;++j) if(YMPME_VecDot(n,YMPME_VecSub(YMPME_ConvexMesh_Vertex(&m,j),a))>tolerance) return PME_INVALID_ARGUMENT;
+		for(j=0;j<nv;++j) if(YMPME_VecDot(n,YMPME_VecSub(YMPME_ConvexMesh_Vertex(&m,j),a))>tolerance) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh is not convex");
 		volume+=(double)length*fabsf(YMPME_VecDot(n,YMPME_VecSub(a,center)))/6;
-		if(!addAxis(faces,&m.faceCount,nf,n)) return PME_CAPACITY_EXCEEDED;
+		if(!addAxis(faces,&m.faceCount,nf,n)) return YMPME_REPORT(PME_CAPACITY_EXCEEDED, "Face-axis buffer capacity exceeded");
 		for(k=0;k<3;++k)
 		{
 			uint32_t start=YMPME_ConvexMesh_Index(&m,i*3+k),end=YMPME_ConvexMesh_Index(&m,i*3+(k+1)%3);
@@ -69,11 +70,11 @@ static pme_result initMesh(pme_convex_mesh* mesh,pme_convex_mesh m,
 				uint32_t x=YMPME_ConvexMesh_Index(&m,j),y=YMPME_ConvexMesh_Index(&m,(j/3)*3+(j+1)%3);
 				if((x==start&&y==end)||(x==end&&y==start)) ++occurrences;
 			}
-			if(occurrences!=2) return PME_INVALID_ARGUMENT;
-			if(!addAxis(edges,&m.edgeCount,ne,YMPME_VecSub(YMPME_ConvexMesh_Vertex(&m,end),YMPME_ConvexMesh_Vertex(&m,start)))) return PME_CAPACITY_EXCEEDED;
+			if(occurrences!=2) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh is not closed: each edge must occur exactly twice");
+			if(!addAxis(edges,&m.edgeCount,ne,YMPME_VecSub(YMPME_ConvexMesh_Vertex(&m,end),YMPME_ConvexMesh_Vertex(&m,start)))) return YMPME_REPORT(PME_CAPACITY_EXCEEDED, "Edge-axis buffer capacity exceeded");
 		}
 	}
-	if(volume<(double)scale*scale*scale*1e-8) return PME_INVALID_ARGUMENT;
+	if(volume<(double)scale*scale*scale*1e-8) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Mesh volume is degenerate");
 
 	m.faceAxes=faces; m.edgeAxes=edges;
 	*mesh=m;
@@ -83,7 +84,7 @@ static pme_result initMesh(pme_convex_mesh* mesh,pme_convex_mesh m,
 pme_result YMPME_ConvexMesh_Init(pme_convex_mesh* mesh,const pme_vec3* v,size_t nv,
     const PME_Index* ix,size_t nt,pme_vec3* faces,size_t nf,pme_vec3* edges,size_t ne)
 {
-    if(!v||!ix||nv>SIZE_MAX/sizeof(*v)) return PME_INVALID_ARGUMENT;
+    if(!v||!ix||nv>SIZE_MAX/sizeof(*v)) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid vertex/index buffer or vertex count");
     pme_convex_mesh m={0};
     m.vertices=v; m.indices=ix; m.vertexCount=nv; m.triangleCount=nt;
     return initMesh(mesh,m,faces,nf,edges,ne);
@@ -95,16 +96,16 @@ pme_result YMPME_ConvexMesh_InitView(pme_convex_mesh* mesh,const pme_mesh_view* 
         view->vertexStride<sizeof(pme_vec3)||view->positionOffset>view->vertexStride-sizeof(pme_vec3)||
         view->vertexCount>SIZE_MAX/view->vertexStride||!isfinite(view->vertexScale)||view->vertexScale<=0||
         ((view->indices!=NULL)==(view->triangles!=NULL))||view->triangleCount<4||
-        view->triangleCount>SIZE_MAX/(3*sizeof(PME_Index))) return PME_INVALID_ARGUMENT;
+        view->triangleCount>SIZE_MAX/(3*sizeof(PME_Index))) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid shared vertex layout, scale, index representation or counts");
     if(view->triangles) {
         if(view->triangleStride<sizeof(const PME_Index*)||
             view->indexPointerOffset>view->triangleStride-sizeof(const PME_Index*)||
-            view->triangleCount>SIZE_MAX/view->triangleStride) return PME_INVALID_ARGUMENT;
+            view->triangleCount>SIZE_MAX/view->triangleStride) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid shared face stride or index-pointer offset");
         for(size_t i=0;i<view->triangleCount;++i) {
             const PME_Index* row;
             memcpy(&row,(const unsigned char*)view->triangles+i*view->triangleStride+
                 view->indexPointerOffset,sizeof(row));
-            if(!row) return PME_INVALID_ARGUMENT;
+            if(!row) return YMPME_REPORT(PME_INVALID_ARGUMENT, "Shared triangle has a null index pointer");
         }
     }
     pme_convex_mesh m={0}; m.view=*view;

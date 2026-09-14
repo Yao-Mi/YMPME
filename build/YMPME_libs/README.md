@@ -35,6 +35,10 @@ cc -std=c99 -DYMPME_INDEX_BITS=16 -I /absolute/path/YMPME_libs/include/YMPME mai
 
 这两个程序在内存中执行 GRE 软件渲染，并验证共享地址、碰撞与源数据不变，结果输出到终端；不会弹出窗口。其余示例及用法见 [手册](手册.md)。
 
+## 日志诊断
+
+默认 WARNING/ERROR 输出到 stderr，包含错误原因与函数/行号，不自动退出程序。支持自定义回调、等级过滤、静音及编译裁剪，断言默认关闭。运行 `./bin/index16/demo_sdk_debug` 查看错误后恢复示例。详见 [DEBUG 说明](docs/DEBUG.md)。
+
 ## 与 GRE 共用数据
 
 `examples/gre/YMPME_GREMesh.h/.c` 是应用侧原生适配层。GRE 持有局部顶点和每面索引，PME 借用它们，不复制几何、不展开索引。物理轴缓存和显示工作数据各自保留，PME 的库本身不依赖 GRE。

@@ -1,6 +1,7 @@
 #ifndef YMPME_DEBUG_H
 #define YMPME_DEBUG_H
 #include "../CORE/YMPME_World.h"
+#include "YMPME_Log.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

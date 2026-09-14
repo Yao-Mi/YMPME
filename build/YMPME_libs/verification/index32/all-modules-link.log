@@ -1,5 +1,5 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/probe', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/probe/build', '-DCMAKE_PREFIX_PATH=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/YMPME_libs']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/probe', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/probe/build', '-DCMAKE_PREFIX_PATH=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/YMPME_libs']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -8,11 +8,11 @@ $ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/reloc
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/probe/build
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/probe/build
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/probe/build', '--parallel', '4']
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/probe/build', '--parallel', '4']
 [ 50%] Building C object CMakeFiles/all_modules.dir/main.c.o
 [100%] Linking C executable all_modules
 [100%] Built target all_modules
 
-$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK qyg1jn9d/probe/build/all_modules']
+$ ['/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/probe/build/all_modules']

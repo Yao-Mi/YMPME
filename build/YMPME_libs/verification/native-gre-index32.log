@@ -1,5 +1,5 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32', '-DCMAKE_BUILD_TYPE=Release', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/YMPME_libs/cmake', '-DYMPME_INDEX_BITS=32', '-DYMPME_SDK_WITH_GRE=ON', '-DYMGRE_DIR=/home/yaomi/文档/0502_YMGRE/build/YMGRE_libs/cmake']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/YMPME_libs/cmake', '-DYMPME_INDEX_BITS=32', '-DYMPME_SDK_WITH_GRE=ON', '-DYMGRE_DIR=/home/yaomi/文档/0502_YMGRE/build/YMGRE_libs/cmake']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -8,46 +8,51 @@ $ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/YMP
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32', '--parallel', '4']
-[ 16%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
-[ 25%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
-[ 16%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
-[ 33%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32', '--parallel', '4']
+[ 28%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
+[ 28%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
+[ 28%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
+[ 28%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[ 42%] Linking C executable bin/demo_sdk_dynamics
+[ 42%] Linking C executable bin/demo_sdk_debug
 [ 50%] Linking C executable bin/demo_sdk_minimal
-[ 50%] Linking C executable bin/demo_sdk_dynamics
-[ 58%] Linking C executable bin/demo_sdk_encoder
-[ 66%] Linking C executable bin/demo_sdk_mesh_indices
-[ 66%] Built target demo_sdk_dynamics
-[ 66%] Built target demo_sdk_encoder
-[ 66%] Built target demo_sdk_minimal
-[ 75%] Building C object CMakeFiles/ympme_shared_gre.dir/gre/YMPME_GREMesh.c.o
-[ 75%] Built target demo_sdk_mesh_indices
-[ 83%] Linking C static library libympme_shared_gre.a
-[ 83%] Built target ympme_shared_gre
-[ 91%] Building C object CMakeFiles/demo_sdk_shared_gre.dir/demo_sdk_shared_gre.c.o
+[ 57%] Linking C executable bin/demo_sdk_encoder
+[ 57%] Built target demo_sdk_minimal
+[ 57%] Built target demo_sdk_encoder
+[ 57%] Built target demo_sdk_debug
+[ 57%] Built target demo_sdk_dynamics
+[ 64%] Building C object CMakeFiles/ympme_shared_gre.dir/gre/YMPME_GREMesh.c.o
+[ 71%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
+[ 85%] Linking C static library libympme_shared_gre.a
+[ 85%] Linking C executable bin/demo_sdk_mesh_indices
+[ 85%] Built target demo_sdk_mesh_indices
+[ 85%] Built target ympme_shared_gre
+[ 92%] Building C object CMakeFiles/demo_sdk_shared_gre.dir/demo_sdk_shared_gre.c.o
 [100%] Linking C executable bin/demo_sdk_shared_gre
 [100%] Built target demo_sdk_shared_gre
 
-$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32', '--output-on-failure']
-Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32
-Test project /home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/consumer32
+$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32', '--output-on-failure']
+Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32
+Test project /home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/consumer32
     Start 1: demo_sdk_minimal
-1/5 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
-    Start 2: demo_sdk_dynamics
-2/5 Test #2: demo_sdk_dynamics ................   Passed    0.01 sec
-    Start 3: demo_sdk_encoder
-3/5 Test #3: demo_sdk_encoder .................   Passed    0.00 sec
-    Start 4: demo_sdk_mesh_indices
-4/5 Test #4: demo_sdk_mesh_indices ............   Passed    0.02 sec
-    Start 5: demo_sdk_shared_gre
-5/5 Test #5: demo_sdk_shared_gre ..............   Passed    0.00 sec
+1/6 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
+    Start 2: demo_sdk_debug
+2/6 Test #2: demo_sdk_debug ...................   Passed    0.00 sec
+    Start 3: demo_sdk_dynamics
+3/6 Test #3: demo_sdk_dynamics ................   Passed    0.01 sec
+    Start 4: demo_sdk_encoder
+4/6 Test #4: demo_sdk_encoder .................   Passed    0.00 sec
+    Start 5: demo_sdk_mesh_indices
+5/6 Test #5: demo_sdk_mesh_indices ............   Passed    0.02 sec
+    Start 6: demo_sdk_shared_gre
+6/6 Test #6: demo_sdk_shared_gre ..............   Passed    0.00 sec
 
-100% tests passed, 0 tests failed out of 5
+100% tests passed, 0 tests failed out of 6
 
 Total Test time (real) =   0.04 sec
 
-$ ['cc', '-std=c99', '-DYMPME_INDEX_BITS=32', '-I', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/all.c', '-Wl,--whole-archive', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/YMPME_libs/lib/libympme_index32.a', '-Wl,--no-whole-archive', '-lm', '-o', '/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/all32']
+$ ['cc', '-std=c99', '-DYMPME_INDEX_BITS=32', '-I', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/all.c', '-Wl,--whole-archive', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/YMPME_libs/lib/libympme_index32.a', '-Wl,--no-whole-archive', '-lm', '-o', '/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/all32']
 
-$ ['/home/yaomi/文档/YMPME/build/pme GRE relocated uoq4opkw/all32']
+$ ['/home/yaomi/文档/YMPME/build/pme GRE relocated oxsjtizl/all32']

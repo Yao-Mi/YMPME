@@ -1,3 +1,4 @@
+#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_Dynamics.h"
 #include "YMPME_Manifold.h"
 #include "YMPME_ContactCache.h"
@@ -326,19 +327,19 @@ pme_result YMPME_Dynamics_Step(pme_dynamics *w, float dt, double time)
 		time < w->time + dt * .5 ||
 		YMPME_Joint_ValidateStep(w->bodies, w->bodyCount, w->joints, w->jointCount, w->gravity, dt,
 								 w->iterations, time) != PME_OK)
-		return PME_INVALID_ARGUMENT;
+		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid dynamics world, buffers, solver parameters, bodies, joints or time");
 	if (w->jointCache)
 	{
 		pme_result result = YMPME_Joint_ValidateCache(w->jointCache, w->jointCount);
-		if (result != PME_OK) return result;
+		if (result != PME_OK) return YMPME_REPORT(result, "Invalid joint cache or insufficient capacity");
 	}
 	for (size_t i = 0; i < w->colliderCount; ++i)
 		if (!valid(&w->colliders[i], w))
-			return PME_INVALID_ARGUMENT;
+			return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid collider shape, mesh, body index or transform");
 	if (w->ccd)
 	{
 		pme_result result = PME_CCD_Validate(w);
-		if (result != PME_OK) return result;
+		if (result != PME_OK) return YMPME_REPORT(result, "Invalid CCD configuration or insufficient capacity");
 	}
 	w->contactCount = 0;
 	for (size_t i = 0; i < w->colliderCount; ++i)
@@ -346,12 +347,12 @@ pme_result YMPME_Dynamics_Step(pme_dynamics *w, float dt, double time)
 			if (enabled(w, &w->colliders[i], &w->colliders[j]) && !detect(w, i, j))
 			{
 				w->contactCount = 0;
-				return PME_CAPACITY_EXCEEDED;
+				return YMPME_REPORT(PME_CAPACITY_EXCEEDED, "Contact buffer capacity exceeded");
 			}
 	if (w->cache && w->cache->capacity < w->contactCount)
 	{
 		w->contactCount = 0;
-		return PME_CAPACITY_EXCEEDED;
+		return YMPME_REPORT(PME_CAPACITY_EXCEEDED, "Contact cache capacity exceeded");
 	}
 	for (size_t i = 0; i < w->contactCount; ++i)
 	{
@@ -361,7 +362,7 @@ pme_result YMPME_Dynamics_Step(pme_dynamics *w, float dt, double time)
 			(w->cache && (!YMPME_VecFinite(c->localPointA) || !YMPME_VecFinite(c->localPointB))))
 		{
 			w->contactCount = 0;
-			return PME_INVALID_ARGUMENT;
+			return YMPME_REPORT(PME_INVALID_ARGUMENT, "Contact geometry or material contains non-finite values");
 		}
 	}
 	if (w->ccd) { w->ccd->count = 0; w->ccd->clampedBodies = 0; }

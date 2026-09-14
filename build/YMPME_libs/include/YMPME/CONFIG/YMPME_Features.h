@@ -7,6 +7,21 @@
 #elif PME_SDK_UNIFIED != 1
 #error "Unified SDK feature configuration mismatch: PME_SDK_UNIFIED"
 #endif
+#ifndef PME_ENABLE_LOGGING
+#define PME_ENABLE_LOGGING 1
+#elif PME_ENABLE_LOGGING != 1
+#error "Unified SDK feature configuration mismatch: PME_ENABLE_LOGGING"
+#endif
+#ifndef PME_DEBUG_STDERR
+#define PME_DEBUG_STDERR 1
+#elif PME_DEBUG_STDERR != 1
+#error "Unified SDK feature configuration mismatch: PME_DEBUG_STDERR"
+#endif
+#ifndef PME_ENABLE_ASSERTS
+#define PME_ENABLE_ASSERTS 0
+#elif PME_ENABLE_ASSERTS != 0
+#error "Unified SDK feature configuration mismatch: PME_ENABLE_ASSERTS"
+#endif
 #ifndef PME_ENABLE_RIGID
 #define PME_ENABLE_RIGID 1
 #elif PME_ENABLE_RIGID != 1

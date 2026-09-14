@@ -14,6 +14,8 @@ def main():
     parser.add_argument("--output",type=Path,default=ROOT/"build/YMPME_libs")
     parser.add_argument("--jobs",type=int,default=4)
     parser.add_argument("--gre-sdk",type=Path,default=ROOT.parent/"0502_YMGRE/build/YMGRE_libs")
+    parser.add_argument("--build-type", choices=("Release", "RelWithDebInfo", "Debug"),
+                        default="Release", help="CMake build configuration; RelWithDebInfo keeps debug symbols")
     args=parser.parse_args()
     output=args.output.resolve(); build=(ROOT/"build").resolve()
     variants=build/"sdk-variants"
@@ -26,7 +28,7 @@ def main():
     before=source_hash()
     for bits in (16,32):
         build_variant(True,["--index-bits",str(bits),"--jobs",str(args.jobs),
-            "--output",str(variants/f"index{bits}/YMPME_libs")])
+            "--output",str(variants/f"index{bits}/YMPME_libs"), "--build-type", args.build_type])
     output.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".pme-dual-stage-",dir=output.parent) as temp:
         stage=Path(temp)/"YMPME_libs"
@@ -90,7 +92,7 @@ endforeach()
             moved=Path(moved_dir)/"YMPME_libs"; shutil.copytree(stage,moved)
             for bits in (16,32):
                 dest=Path(moved_dir)/f"consumer{bits}"; log=stage/f"verification/native-gre-index{bits}.log"
-                run(["cmake","-S",moved/"examples","-B",dest,"-DCMAKE_BUILD_TYPE=Release",
+                run(["cmake","-S",moved/"examples","-B",dest,f"-DCMAKE_BUILD_TYPE={args.build_type}",
                      f"-DYMPME_DIR={moved/'cmake'}",f"-DYMPME_INDEX_BITS={bits}",
                      "-DYMPME_SDK_WITH_GRE=ON",f"-DYMGRE_DIR={args.gre_sdk.resolve()/'cmake'}"],log)
                 run(["cmake","--build",dest,"--parallel",args.jobs],log)
@@ -107,7 +109,7 @@ endforeach()
         info=json.loads((variants/"index32/YMPME_libs/BUILD_INFO.json").read_text())
         info.update(index_bits=[16,32],layout="unified-dual-index",default_index_bits=16,
             static_libraries=["libympme_index16.a","libympme_index32.a"],
-            native_gre_sharing_verified=True,source_sha256=before,rebuild_command="python3 sdk/build.py")
+            native_gre_sharing_verified=True,source_sha256=before,rebuild_command=f"python3 sdk/build.py --build-type {args.build_type}")
         (stage/"BUILD_INFO.json").write_text(json.dumps(info,ensure_ascii=False,indent=2)+"\n")
         (stage/"checksums.sha256").unlink(missing_ok=True)
         (stage/"checksums.sha256").write_text("\n".join(hashlib.sha256(p.read_bytes()).hexdigest()+"  "+p.relative_to(stage).as_posix()
