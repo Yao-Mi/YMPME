@@ -1,6 +1,6 @@
 {
   "version": "0.3.1",
-  "built_at_utc": "2026-09-14T04:43:20.567718+00:00",
+  "built_at_utc": "2026-09-14T05:44:24.934481+00:00",
   "system": "Linux",
   "machine": "x86_64",
   "profile": "full",
@@ -17,7 +17,7 @@
     "stderr": true,
     "asserts": false
   },
-  "source_sha256": "e0f12614b39ba7a1d494ed9e6223eea76327ad0ca6ebc758795f6d829edcaf32",
+  "source_sha256": "2eb0566bb1763f26aaec51d71541a82fabfec47c303aa4c4784dfcfba29cf2dd",
   "static_libraries": [
     "libympme_index16.a",
     "libympme_index32.a"
@@ -49,6 +49,8 @@
     "SENSOR_DEPTH",
     "SENSOR_TACTILE"
   ],
+  "library_license": "LicenseRef-YMPME-Noncommercial-1.2",
+  "license_file": "LICENSE",
   "graphics_dependencies": [],
   "requires_engine_source": false,
   "relocated_examples_passed": true,

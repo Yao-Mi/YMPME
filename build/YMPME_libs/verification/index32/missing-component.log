@@ -5,11 +5,11 @@
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Configuring incomplete, errors occurred!
-See also "/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/missing-component/build/CMakeFiles/CMakeOutput.log".
+See also "/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/missing-component/build/CMakeFiles/CMakeOutput.log".
 CMake Error at CMakeLists.txt:3 (find_package):
   Found package configuration file:
 
-    /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/YMPME_libs/cmake/YMPMEConfig.cmake
+    /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/YMPME_libs/cmake/YMPMEConfig.cmake
 
   but it set YMPME_FOUND to FALSE so package "YMPME" is considered to be NOT
   FOUND.  Reason given by package:

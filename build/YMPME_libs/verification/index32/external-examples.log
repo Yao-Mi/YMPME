@@ -1,5 +1,5 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/YMPME_libs/cmake']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/YMPME_libs/cmake']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -8,34 +8,34 @@ $ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/reloc
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build', '--parallel', '4']
-[ 30%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
-[ 30%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
-[ 30%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build', '--parallel', '4']
+[ 40%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
 [ 40%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
+[ 40%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
+[ 40%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[ 50%] Linking C executable bin/demo_sdk_encoder
 [ 70%] Linking C executable bin/demo_sdk_minimal
-[ 70%] Linking C executable bin/demo_sdk_encoder
 [ 70%] Linking C executable bin/demo_sdk_debug
 [ 80%] Linking C executable bin/demo_sdk_dynamics
-[ 80%] Built target demo_sdk_minimal
-[ 80%] Built target demo_sdk_debug
 [ 80%] Built target demo_sdk_encoder
+[ 80%] Built target demo_sdk_debug
+[ 80%] Built target demo_sdk_minimal
 [ 80%] Built target demo_sdk_dynamics
 [ 90%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
 [100%] Linking C executable bin/demo_sdk_mesh_indices
 [100%] Built target demo_sdk_mesh_indices
 
-$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build', '--output-on-failure']
-Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build
-Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build
+$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build', '--output-on-failure']
+Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build
+Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build
     Start 1: demo_sdk_minimal
 1/5 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
     Start 2: demo_sdk_debug
 2/5 Test #2: demo_sdk_debug ...................   Passed    0.00 sec
     Start 3: demo_sdk_dynamics
-3/5 Test #3: demo_sdk_dynamics ................   Passed    0.00 sec
+3/5 Test #3: demo_sdk_dynamics ................   Passed    0.01 sec
     Start 4: demo_sdk_encoder
 4/5 Test #4: demo_sdk_encoder .................   Passed    0.00 sec
     Start 5: demo_sdk_mesh_indices
@@ -45,10 +45,10 @@ Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated S
 
 Total Test time (real) =   0.04 sec
 
-$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK gryfwxi6/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs']
+$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs']
 -- Install configuration: "RelWithDebInfo"
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs/bin/demo_sdk_minimal
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs/bin/demo_sdk_debug
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs/bin/demo_sdk_dynamics
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs/bin/demo_sdk_encoder
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-a9_wgy99/YMPME_libs/bin/demo_sdk_mesh_indices
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs/bin/demo_sdk_minimal
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs/bin/demo_sdk_debug
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs/bin/demo_sdk_dynamics
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs/bin/demo_sdk_encoder
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-tfl8co0s/YMPME_libs/bin/demo_sdk_mesh_indices

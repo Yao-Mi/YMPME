@@ -32,7 +32,7 @@ def run(args, log):
         raise RuntimeError(f"Command failed; see {log}")
 
 def source_hash():
-    paths = [ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md", ROOT / "SHARED_MESH.md"]
+    paths = [ROOT / "LICENSE", ROOT / "README.md", ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md", ROOT / "SHARED_MESH.md"]
     for folder in ("YMPME", "cmake", "sdk", "tests"):
         paths.extend(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
     h = hashlib.sha256()
@@ -87,6 +87,8 @@ def main(unified=False, argv=None):
         stage = Path(temp) / "YMPME_libs"
         run(["cmake", "--install", work / "engine", "--prefix", stage], build_log)
         (stage / ".ympme-sdk").write_text("YMPME standalone SDK\n")
+        if (stage / "LICENSE").read_bytes() != (ROOT / "LICENSE").read_bytes():
+            raise RuntimeError("Installed SDK license differs from source LICENSE")
         verify = stage / "verification"
         verify.mkdir()
         shutil.copy2(build_log, verify / "build.log")
@@ -176,6 +178,8 @@ endif()
             "debug_options": {"logging": True, "stderr": True, "asserts": False},
             "source_sha256": before, "static_libraries": sorted(p.name for p in (stage / "lib").glob("*.a")),
             "enabled_options": [opt for opt in MODULE_OPTIONS if args.profile == "full"],
+            "library_license": "LicenseRef-YMPME-Noncommercial-1.2",
+            "license_file": "LICENSE",
             "graphics_dependencies": [], "requires_engine_source": False,
             "relocated_examples_passed": True, "all_modules_link_passed": True,
             "rebuild_command": ("python3 sdk/build.py" if unified else "python3 sdk/build_modular.py --profile " + args.profile) + f" --build-type {args.build_type}",
