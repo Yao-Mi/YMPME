@@ -5,17 +5,17 @@
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Configuring incomplete, errors occurred!
-See also "/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/missing-component/build/CMakeFiles/CMakeOutput.log".
+See also "/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/missing-component/build/CMakeFiles/CMakeOutput.log".
 CMake Error at CMakeLists.txt:3 (find_package):
   Found package configuration file:
 
-    /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 6wfips1f/YMPME_libs/cmake/YMPMEConfig.cmake
+    /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/YMPME_libs/cmake/YMPMEConfig.cmake
 
   but it set YMPME_FOUND to FALSE so package "YMPME" is considered to be NOT
   FOUND.  Reason given by package:
 
   Component 'not_a_real_module' is not in this YMPME build.  Available:
-  ympme;rigid;joint;dynamics;query;flight;drive;terrain;suspension;vehicle;gear;belt;pulley;rope;aircraft;pendulum;surface_atlas;skin_contact;softbody;sensor;sensor_geometry;imu;encoder;force_sensor;laser;lidar;depth;tactile
+  ympme;rigid;joint;dynamics;query;flight;drive;terrain;suspension;vehicle;gear;belt;pulley;rope;aircraft;pendulum;surface_atlas;skin_contact;softbody;sensor;sensor_geometry;imu;encoder;force_sensor;laser;lidar;depth;tactile;statics;statics3d;solid_statics
 
 
 

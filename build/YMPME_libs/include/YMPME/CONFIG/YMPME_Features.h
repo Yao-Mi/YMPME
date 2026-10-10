@@ -157,6 +157,21 @@
 #elif PME_SENSOR_TACTILE != 1
 #error "Unified SDK feature configuration mismatch: PME_SENSOR_TACTILE"
 #endif
+#ifndef PME_ENABLE_STATICS
+#define PME_ENABLE_STATICS 1
+#elif PME_ENABLE_STATICS != 1
+#error "Unified SDK feature configuration mismatch: PME_ENABLE_STATICS"
+#endif
+#ifndef PME_ENABLE_STATICS3D
+#define PME_ENABLE_STATICS3D 1
+#elif PME_ENABLE_STATICS3D != 1
+#error "Unified SDK feature configuration mismatch: PME_ENABLE_STATICS3D"
+#endif
+#ifndef PME_ENABLE_SOLID_STATICS
+#define PME_ENABLE_SOLID_STATICS 1
+#elif PME_ENABLE_SOLID_STATICS != 1
+#error "Unified SDK feature configuration mismatch: PME_ENABLE_SOLID_STATICS"
+#endif
 
 #ifndef PME_ENABLE_DYNAMICS
 #define PME_ENABLE_DYNAMICS 0
@@ -327,5 +342,23 @@
 #endif
 #if PME_ENABLE_SOFTBODY != 0 && PME_ENABLE_SOFTBODY != 1
 #error "PME_ENABLE_SOFTBODY must be 0 or 1"
+#endif
+#ifndef PME_ENABLE_STATICS
+#define PME_ENABLE_STATICS 0
+#endif
+#if PME_ENABLE_STATICS != 0 && PME_ENABLE_STATICS != 1
+#error "PME_ENABLE_STATICS must be 0 or 1"
+#endif
+#ifndef PME_ENABLE_STATICS3D
+#define PME_ENABLE_STATICS3D 0
+#endif
+#if PME_ENABLE_STATICS3D != 0 && PME_ENABLE_STATICS3D != 1
+#error "PME_ENABLE_STATICS3D must be 0 or 1"
+#endif
+#ifndef PME_ENABLE_SOLID_STATICS
+#define PME_ENABLE_SOLID_STATICS 0
+#endif
+#if PME_ENABLE_SOLID_STATICS != 0 && PME_ENABLE_SOLID_STATICS != 1
+#error "PME_ENABLE_SOLID_STATICS must be 0 or 1"
 #endif
 #endif

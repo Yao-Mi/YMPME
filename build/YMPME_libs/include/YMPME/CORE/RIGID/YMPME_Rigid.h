@@ -40,7 +40,8 @@ extern "C"
 	void YMPME_Rigid_Impulse(pme_rigid_body *body, pme_vec3 linear, pme_vec3 angular);
 	/* 分阶段接口供JOINT调用：Begin -> 求解冲量 -> End。调用者先验证全部输入。
 	 * 单独自由体使用Step；同一刚体不可再用旧World或AIRCRAFT重复积分。
-	 * dt: (0,0.05]秒，推荐1/240；endTime为步末仿真时间。 */
+	 * dt: (0,0.05]秒且1/dt有限，推荐1/240；endTime须能严格前进。
+	 * 独立Step只提交有限结果；溢出返回INVALID_ARGUMENT且保留输入。 */
 	void YMPME_Rigid_Begin(pme_rigid_body *body, pme_vec3 gravity, float dt);
 	void YMPME_Rigid_End(pme_rigid_body *body, float dt, double endTime);
 	pme_result YMPME_Rigid_Step(pme_rigid_body *body, pme_vec3 gravity, float dt, double endTime);

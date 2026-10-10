@@ -1,6 +1,6 @@
 {
-  "version": "0.3.1",
-  "built_at_utc": "2026-09-14T05:44:24.934481+00:00",
+  "version": "0.4.0",
+  "built_at_utc": "2026-10-10T02:39:13.811197+00:00",
   "system": "Linux",
   "machine": "x86_64",
   "profile": "full",
@@ -10,14 +10,14 @@
     32
   ],
   "compiler": "cc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
-  "build_type": "RelWithDebInfo",
+  "build_type": "Release",
   "position_independent": true,
   "debug_options": {
     "logging": true,
     "stderr": true,
     "asserts": false
   },
-  "source_sha256": "2eb0566bb1763f26aaec51d71541a82fabfec47c303aa4c4784dfcfba29cf2dd",
+  "source_sha256": "066eee77190d6e6ab280a6f0b92eb4de80a8385f5f11fa6b00abda1edb060a5c",
   "static_libraries": [
     "libympme_index16.a",
     "libympme_index32.a"
@@ -29,6 +29,9 @@
     "ENABLE_QUERY",
     "ENABLE_FLIGHT",
     "ENABLE_SOFTBODY",
+    "ENABLE_STATICS",
+    "ENABLE_STATICS3D",
+    "ENABLE_SOLID_STATICS",
     "MODEL_DRIVE",
     "MODEL_TERRAIN",
     "MODEL_SUSPENSION",
@@ -55,7 +58,7 @@
   "requires_engine_source": false,
   "relocated_examples_passed": true,
   "all_modules_link_passed": true,
-  "rebuild_command": "python3 sdk/build.py --build-type RelWithDebInfo",
+  "rebuild_command": "python3 sdk/build.py --build-type Release",
   "default_index_bits": 16,
   "native_gre_sharing_verified": true
 }

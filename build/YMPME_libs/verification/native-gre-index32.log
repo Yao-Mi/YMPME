@@ -1,58 +1,81 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/YMPME_libs/cmake', '-DYMPME_INDEX_BITS=32', '-DYMPME_SDK_WITH_GRE=ON', '-DYMGRE_DIR=/home/yaomi/文档/0502_YMGRE/build/YMGRE_libs/cmake']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32', '-DCMAKE_BUILD_TYPE=Release', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/YMPME_libs/cmake', '-DYMPME_INDEX_BITS=32', '-DYMPME_SDK_WITH_GRE=ON', '-DYMGRE_DIR=/home/yaomi/文档/0502_YMGRE/build/YMGRE_libs/cmake']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
 -- Check for working C compiler: /usr/bin/cc - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
+-- Found PNG: /usr/lib/x86_64-linux-gnu/libpng.so (found version "1.6.37") 
+-- Found JPEG: /usr/lib/x86_64-linux-gnu/libjpeg.so (found version "80") 
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32', '--parallel', '4']
-[ 28%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
-[ 28%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
-[ 28%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
-[ 28%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
-[ 35%] Linking C executable bin/demo_sdk_encoder
-[ 57%] Linking C executable bin/demo_sdk_debug
-[ 57%] Linking C executable bin/demo_sdk_dynamics
-[ 57%] Linking C executable bin/demo_sdk_minimal
-[ 57%] Built target demo_sdk_minimal
-[ 57%] Built target demo_sdk_encoder
-[ 57%] Built target demo_sdk_debug
-[ 71%] Building C object CMakeFiles/ympme_shared_gre.dir/gre/YMPME_GREMesh.c.o
-[ 71%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
-[ 71%] Built target demo_sdk_dynamics
-[ 85%] Linking C static library libympme_shared_gre.a
-[ 85%] Linking C executable bin/demo_sdk_mesh_indices
-[ 85%] Built target ympme_shared_gre
-[ 85%] Built target demo_sdk_mesh_indices
-[ 92%] Building C object CMakeFiles/demo_sdk_shared_gre.dir/demo_sdk_shared_gre.c.o
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32', '--parallel', '6']
+[  4%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[  9%] Building C object CMakeFiles/demo_sdk_version.dir/demo_sdk_version.c.o
+[ 13%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
+[ 18%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
+[ 22%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
+[ 27%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
+[ 40%] Linking C executable bin/demo_sdk_debug
+[ 40%] Linking C executable bin/demo_sdk_encoder
+[ 40%] Linking C executable bin/demo_sdk_dynamics
+[ 45%] Linking C executable bin/demo_sdk_version
+[ 50%] Linking C executable bin/demo_sdk_minimal
+[ 54%] Linking C executable bin/demo_sdk_mesh_indices
+[ 54%] Built target demo_sdk_debug
+[ 54%] Built target demo_sdk_encoder
+[ 54%] Built target demo_sdk_version
+[ 54%] Built target demo_sdk_dynamics
+[ 54%] Built target demo_sdk_minimal
+[ 54%] Built target demo_sdk_mesh_indices
+[ 59%] Building C object CMakeFiles/demo_sdk_statics3d.dir/demo_sdk_statics3d.c.o
+[ 63%] Building C object CMakeFiles/demo_sdk_statics.dir/demo_sdk_statics.c.o
+[ 68%] Building C object CMakeFiles/ympme_shared_gre.dir/gre/YMPME_GREMesh.c.o
+[ 72%] Building C object CMakeFiles/demo_sdk_solid_statics.dir/demo_sdk_solid_statics.c.o
+[ 77%] Linking C executable bin/demo_sdk_statics3d
+[ 81%] Linking C executable bin/demo_sdk_solid_statics
+[ 86%] Linking C executable bin/demo_sdk_statics
+[ 86%] Built target demo_sdk_statics3d
+[ 86%] Built target demo_sdk_solid_statics
+[ 86%] Built target demo_sdk_statics
+[ 90%] Linking C static library libympme_shared_gre.a
+[ 90%] Built target ympme_shared_gre
+[ 95%] Building C object CMakeFiles/demo_sdk_shared_gre.dir/demo_sdk_shared_gre.c.o
 [100%] Linking C executable bin/demo_sdk_shared_gre
 [100%] Built target demo_sdk_shared_gre
 
-$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32', '--output-on-failure']
-Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32
-Test project /home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/consumer32
-    Start 1: demo_sdk_minimal
-1/6 Test #1: demo_sdk_minimal .................   Passed    0.00 sec
-    Start 2: demo_sdk_debug
-2/6 Test #2: demo_sdk_debug ...................   Passed    0.00 sec
-    Start 3: demo_sdk_dynamics
-3/6 Test #3: demo_sdk_dynamics ................   Passed    0.01 sec
-    Start 4: demo_sdk_encoder
-4/6 Test #4: demo_sdk_encoder .................   Passed    0.00 sec
-    Start 5: demo_sdk_mesh_indices
-5/6 Test #5: demo_sdk_mesh_indices ............   Passed    0.02 sec
-    Start 6: demo_sdk_shared_gre
-6/6 Test #6: demo_sdk_shared_gre ..............   Passed    0.00 sec
+$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32', '--output-on-failure']
+Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32
+Test project /home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/consumer32
+      Start  1: demo_sdk_version
+ 1/10 Test  #1: demo_sdk_version .................   Passed    0.00 sec
+      Start  2: demo_sdk_minimal
+ 2/10 Test  #2: demo_sdk_minimal .................   Passed    0.00 sec
+      Start  3: demo_sdk_debug
+ 3/10 Test  #3: demo_sdk_debug ...................   Passed    0.00 sec
+      Start  4: demo_sdk_dynamics
+ 4/10 Test  #4: demo_sdk_dynamics ................   Passed    0.01 sec
+      Start  5: demo_sdk_encoder
+ 5/10 Test  #5: demo_sdk_encoder .................   Passed    0.00 sec
+      Start  6: demo_sdk_mesh_indices
+ 6/10 Test  #6: demo_sdk_mesh_indices ............   Passed    0.02 sec
+      Start  7: demo_sdk_shared_gre
+ 7/10 Test  #7: demo_sdk_shared_gre ..............   Passed    0.00 sec
+      Start  8: demo_sdk_statics
+ 8/10 Test  #8: demo_sdk_statics .................   Passed    0.00 sec
+      Start  9: demo_sdk_statics3d
+ 9/10 Test  #9: demo_sdk_statics3d ...............   Passed    0.00 sec
+      Start 10: demo_sdk_solid_statics
+10/10 Test #10: demo_sdk_solid_statics ...........   Passed    0.00 sec
 
-100% tests passed, 0 tests failed out of 6
+100% tests passed, 0 tests failed out of 10
 
 Total Test time (real) =   0.04 sec
 
-$ ['cc', '-std=c99', '-DYMPME_INDEX_BITS=32', '-I', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/all.c', '-Wl,--whole-archive', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/YMPME_libs/lib/libympme_index32.a', '-Wl,--no-whole-archive', '-lm', '-o', '/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/all32']
+$ ['cc', '-std=c99', '-DYMPME_INDEX_BITS=32', '-I', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/YMPME_libs/include/YMPME', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/all.c', '-Wl,--whole-archive', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/YMPME_libs/lib/libympme_index32.a', '-Wl,--no-whole-archive', '-lm', '-o', '/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/all32']
 
-$ ['/home/yaomi/文档/YMPME/build/pme GRE relocated 3mqzsawk/all32']
+$ ['/home/yaomi/文档/YMPME/build/pme GRE relocated gxb9umvi/all32']

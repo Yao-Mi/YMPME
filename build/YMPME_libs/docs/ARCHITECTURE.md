@@ -26,7 +26,7 @@ YMGRE 渲染管线 → framebuffer → 应用显示层
 - OPOBJ：描述校验、Body 初始化、Create / Free；与 GRE 的 OPOBJ 对齐。
 - CORE：无分配向量运算、几何接触、世界时钟、平移约束求解。
 - MODEL：可复用物理模型层，依赖核心且不依赖 GRE/SDL；按模型独立裁剪。ROPE、BELT、PULLEY、GEAR、DRIVE、TERRAIN、SUSPENSION、VEHICLE 已由 Demo 复用，见 [模型层约定](YMPME/MODEL/README.md)。
-- DEBUG：只读运行统计；不把 printf 或窗口系统引入物理循环。
+- DEBUG：运行统计、可裁剪日志回调和可选 stderr 输出；普通错误不终止程序。
 - IOFILE：当前只记录扩展边界，未设计物理场景序列化格式。
 - EXT/FLIGHT：独立且默认关闭的飞行载荷扩展，可分别裁剪旋翼和气动力；不包含通用旋转刚体求解器。
 - BRIDGE：可选外部引擎转换，隔离顶点布局和坐标尺度约定。
@@ -105,3 +105,11 @@ CORE/MODEL 输出独立真值，SENSOR 消费真值并生成有类型样本，�
 ## DYNAMICS 共同求解路径
 
 `DYNAMICS → JOINT → CORE/RIGID → CORE`，可选且默认关闭，不依赖传感器/显示/骨骼。复用关节 Prepare / SolveIteration / Finish 和刚体 Begin / End，在同一子步交替处理关节和带角冲量的接触，只积分一次。几何支持球、旋转盒子、闭合凸 Mesh 和静态平面。复用 CORE SAT，面片裁剪/边见证点生成最多四点凸体流形；碰撞体支持相对质心的局部位姿；可选调用方缓冲实现接触点匹配缓存和接触冲量跨步热启动。仍逐步重新精检测；关节另有独立可选缓存，按槽位复用并衰减旧冲量，默认不开启；可选球体/静态环境 CCD 在积分阶段按 TOI 分段响应，冲击事件独立于离散接触缓存；通用动态体 CCD、休眠仍待补。旧 World 与 AIRCRAFT 未自动改为此路径。grasp_lab 仅为两指配置 SurfaceTactile，物体只输出直接接触载荷；感知按需添加。
+
+## 按用途组合与发布验证
+
+纯动画直接走 SKE→GRE；接触感知由上层把动画表面的位置/速度提供给 PME；需要受力改变运动时才使用 DYNAMICS，混合应用可以只对部分对象求解。各 demo 保留对应的模型和积分方式，同一状态只由一个积分器推进。
+
+RIGID、JOINT、DYNAMICS 与 STATICS/STATICS3D/SOLID_STATICS 都是可裁剪库；静力求解只消费应用提供的结构与载荷，不自动创建 skin，也不自动转换运动接触载荷。SOFTBODY 的软垫/软球近似与静力实体 FEM 是不同能力。
+
+版本由 `CONFIG/YMPME_PubDefine.h` 统一定义，链接库提供版本查询。发布前使用 `CMakePresets.json` 的裁剪、索引位宽和 sanitizer 配置，再验证搬移后的 SDK。细节和当前边界见 `tests/README.md`、`CHANGELOG.md`。
