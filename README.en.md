@@ -1,6 +1,6 @@
 # YMPME
 
-Source version **0.4.0** · [Changelog](CHANGELOG.md) · [Regression and stability checks](tests/README.md)
+Source version **0.4.0** · [Changelog](CHANGELOG.md) · [Regression and stability checks](tests/README.md) · [SDK release](releases/README.md)
 
 A modular C99 physics library for games, mechanism experiments and control simulation on PC/MCU. The core is independent of rendering; optional demos use YMGRE for windows and visualization.
 

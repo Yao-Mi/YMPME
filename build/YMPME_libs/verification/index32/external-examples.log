@@ -1,5 +1,5 @@
 
-$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build', '-DCMAKE_BUILD_TYPE=Release', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/YMPME_libs/cmake']
+$ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/YMPME_libs/examples', '-B', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build', '-DCMAKE_BUILD_TYPE=Release', '-DYMPME_DIR=/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/YMPME_libs/cmake']
 -- The C compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -8,40 +8,40 @@ $ ['cmake', '-S', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/reloc
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build
+-- Build files have been written to: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build
 
-$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build', '--parallel', '6']
-[  5%] Building C object CMakeFiles/demo_sdk_version.dir/demo_sdk_version.c.o
+$ ['cmake', '--build', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build', '--parallel', '6']
 [ 11%] Building C object CMakeFiles/demo_sdk_minimal.dir/demo_sdk_minimal.c.o
-[ 16%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
-[ 22%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[ 11%] Building C object CMakeFiles/demo_sdk_version.dir/demo_sdk_version.c.o
+[ 16%] Building C object CMakeFiles/demo_sdk_debug.dir/demo_sdk_debug.c.o
+[ 22%] Building C object CMakeFiles/demo_sdk_encoder.dir/demo_sdk_encoder.c.o
 [ 27%] Building C object CMakeFiles/demo_sdk_dynamics.dir/demo_sdk_dynamics.c.o
 [ 33%] Building C object CMakeFiles/demo_sdk_mesh_indices.dir/demo_sdk_mesh_indices.c.o
-[ 38%] Linking C executable bin/demo_sdk_dynamics
-[ 50%] Linking C executable bin/demo_sdk_mesh_indices
-[ 61%] Linking C executable bin/demo_sdk_encoder
-[ 61%] Linking C executable bin/demo_sdk_debug
-[ 61%] Linking C executable bin/demo_sdk_version
+[ 38%] Linking C executable bin/demo_sdk_encoder
+[ 38%] Built target demo_sdk_encoder
+[ 44%] Building C object CMakeFiles/demo_sdk_statics.dir/demo_sdk_statics.c.o
 [ 66%] Linking C executable bin/demo_sdk_minimal
-[ 66%] Built target demo_sdk_version
-[ 66%] Built target demo_sdk_encoder
-[ 66%] Built target demo_sdk_debug
-[ 66%] Built target demo_sdk_dynamics
-[ 66%] Built target demo_sdk_minimal
-[ 66%] Built target demo_sdk_mesh_indices
-[ 72%] Building C object CMakeFiles/demo_sdk_statics.dir/demo_sdk_statics.c.o
-[ 77%] Building C object CMakeFiles/demo_sdk_statics3d.dir/demo_sdk_statics3d.c.o
-[ 83%] Building C object CMakeFiles/demo_sdk_solid_statics.dir/demo_sdk_solid_statics.c.o
-[ 88%] Linking C executable bin/demo_sdk_statics3d
-[ 94%] Linking C executable bin/demo_sdk_statics
+[ 66%] Linking C executable bin/demo_sdk_debug
+[ 66%] Linking C executable bin/demo_sdk_statics
+[ 66%] Linking C executable bin/demo_sdk_dynamics
+[ 72%] Linking C executable bin/demo_sdk_mesh_indices
+[ 77%] Linking C executable bin/demo_sdk_version
+[ 77%] Built target demo_sdk_minimal
+[ 77%] Built target demo_sdk_statics
+[ 77%] Built target demo_sdk_version
+[ 77%] Built target demo_sdk_debug
+[ 77%] Built target demo_sdk_dynamics
+[ 77%] Built target demo_sdk_mesh_indices
+[ 83%] Building C object CMakeFiles/demo_sdk_statics3d.dir/demo_sdk_statics3d.c.o
+[ 88%] Building C object CMakeFiles/demo_sdk_solid_statics.dir/demo_sdk_solid_statics.c.o
+[ 94%] Linking C executable bin/demo_sdk_statics3d
 [100%] Linking C executable bin/demo_sdk_solid_statics
 [100%] Built target demo_sdk_statics3d
 [100%] Built target demo_sdk_solid_statics
-[100%] Built target demo_sdk_statics
 
-$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build', '--output-on-failure']
-Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build
-Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build
+$ ['ctest', '--test-dir', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build', '--output-on-failure']
+Internal ctest changing into directory: /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build
+Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build
     Start 1: demo_sdk_version
 1/9 Test #1: demo_sdk_version .................   Passed    0.00 sec
     Start 2: demo_sdk_minimal
@@ -49,7 +49,7 @@ Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated S
     Start 3: demo_sdk_debug
 3/9 Test #3: demo_sdk_debug ...................   Passed    0.00 sec
     Start 4: demo_sdk_dynamics
-4/9 Test #4: demo_sdk_dynamics ................   Passed    0.01 sec
+4/9 Test #4: demo_sdk_dynamics ................   Passed    0.00 sec
     Start 5: demo_sdk_encoder
 5/9 Test #5: demo_sdk_encoder .................   Passed    0.00 sec
     Start 6: demo_sdk_mesh_indices
@@ -65,14 +65,14 @@ Test project /home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated S
 
 Total Test time (real) =   0.04 sec
 
-$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK apnluf2t/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs']
+$ ['cmake', '--install', '/home/yaomi/文档/YMPME/build/sdk-work/unified-index32/relocated SDK 7x_odxes/consumer-build', '--prefix', '/home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs']
 -- Install configuration: "Release"
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_version
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_minimal
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_debug
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_dynamics
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_encoder
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_mesh_indices
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_statics
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_statics3d
--- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-bq50lc60/YMPME_libs/bin/demo_sdk_solid_statics
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_version
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_minimal
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_debug
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_dynamics
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_encoder
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_mesh_indices
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_statics
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_statics3d
+-- Installing: /home/yaomi/文档/YMPME/build/sdk-variants/index32/.ympme-sdk-stage-khv6lj0w/YMPME_libs/bin/demo_sdk_solid_statics

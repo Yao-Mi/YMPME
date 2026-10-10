@@ -39,3 +39,7 @@ ctest --preset headless -j4
 GRE 当前配置使用 `ctest --test-dir build --output-on-failure`；软指完整夹持使用已有独立 `build/soft_finger_sanitize` 配置验证。历史结果见 [HISTORY.md](HISTORY.md)。
 
 本次验证的配置、结果与测量见 [VALIDATION.md](VALIDATION.md)。
+
+## 发布包回归
+
+`python3 tests/test_sdk_package.py` 验证压缩包根目录、完整校验清单、可复现压缩、过期源码拒绝、独立解压失败、压缩失败及最终校验文件替换失败时保留旧发布包，也检查本地打包不会更新 `releases/`。实际发布还会对解压后的 16/32 位 SDK 重编运行纯物理示例，操作见 [发布包说明](../releases/README.md)。
