@@ -9,9 +9,9 @@ void* PME_malloc0(size_t n) { ++allocations; return malloc(n); }
 void PME_free0(void* p) { free(p); }
 static const pme_vec3 cube[]={{-0.5f,-0.5f,-0.5f},{0.5f,-0.5f,-0.5f},{0.5f,0.5f,-0.5f},{-0.5f,0.5f,-0.5f},
  {-0.5f,-0.5f,0.5f},{0.5f,-0.5f,0.5f},{0.5f,0.5f,0.5f},{-0.5f,0.5f,0.5f}};
-static const uint32_t cubeIx[]={0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,3,7,6,3,6,2,0,4,7,0,7,3,1,2,6,1,6,5};
+static const PME_Index cubeIx[]={0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,3,7,6,3,6,2,0,4,7,0,7,3,1,2,6,1,6,5};
 static const pme_vec3 tetra[]={{0,0,0},{1,0,0},{0,1,0},{0,0,1}};
-static const uint32_t tetraIx[]={0,2,1,0,1,3,0,3,2,1,2,3};
+static const PME_Index tetraIx[]={0,2,1,0,1,3,0,3,2,1,2,3};
 static pme_rotation yaw(float angle)
 {
  pme_rotation r={{{cosf(angle),0,-sinf(angle)},{0,1,0},{sinf(angle),0,cosf(angle)}}}; return r;
@@ -35,7 +35,7 @@ int main(void)
  CHECK(!failed.vertices);
  CHECK(YMPME_ConvexMesh_Init(&failed,cube,8,cubeIx,12,cf,0,ce,36)==PME_CAPACITY_EXCEEDED);
  {
-  pme_vec3 concave[8]; uint32_t invalid[36];
+  pme_vec3 concave[8]; PME_Index invalid[36];
   memcpy(concave,cube,sizeof(cube)); concave[6]=(pme_vec3){0,0,0};
   CHECK(YMPME_ConvexMesh_Init(&failed,concave,8,cubeIx,12,cf,12,ce,36)==PME_INVALID_ARGUMENT);
   memcpy(invalid,cubeIx,sizeof(cubeIx)); invalid[0]=80;

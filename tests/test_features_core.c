@@ -1,6 +1,9 @@
 #include "YMPME.h"
 #include "EXT/FLIGHT/YMPME_Flight.h"
 #include <stdio.h>
+#if PME_ENABLE_STATICS || PME_ENABLE_STATICS3D || PME_ENABLE_SOLID_STATICS
+#error "Core must not inherit static analysis"
+#endif
 #if PME_MODEL_SKIN
 #error "Core must not inherit skin contact model"
 #endif

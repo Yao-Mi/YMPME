@@ -22,7 +22,7 @@ typedef struct fixture_
 	pme_convex_mesh mesh;
 	pme_vec3 vertices[8], faces[12], edges[36];
 } fixture;
-static const uint32_t ix[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
+static const PME_Index ix[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
 								2, 6, 7, 2, 7, 3, 0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6};
 static float norm(pme_vec3 p) { return sqrtf(YMPME_VecDot(p, p)); }
 static void init(fixture *f, int meshA, int meshB)

@@ -194,10 +194,18 @@ void YMPME_Rigid_End(pme_rigid_body *b, float dt, double time)
 }
 pme_result YMPME_Rigid_Step(pme_rigid_body *b, pme_vec3 g, float dt, double time)
 {
-	if (!YMPME_Rigid_IsValid(b) || !YMPME_VecFinite(g) || !isfinite(dt) || dt <= 0 || dt > .05f ||
-		!isfinite(time) || time < b->feedback.time + dt * .5)
+	if (!YMPME_Rigid_IsValid(b) || !YMPME_VecFinite(g) || !isfinite(dt) || dt <= 0 ||
+		!isfinite(1.f / dt) || dt > .05f || !isfinite(time) || time <= b->feedback.time ||
+		time < b->feedback.time + dt * .5)
 		return PME_INVALID_ARGUMENT;
-	YMPME_Rigid_Begin(b, g, dt);
-	YMPME_Rigid_End(b, dt, time);
+	/* Commit only finite results: an extreme finite load may overflow
+	 * intermediates. */
+	pme_rigid_body next = *b;
+	YMPME_Rigid_Begin(&next, g, dt);
+	YMPME_Rigid_End(&next, dt, time);
+	if (!YMPME_Rigid_IsValid(&next) || !YMPME_VecFinite(next.feedback.acceleration) ||
+		!YMPME_VecFinite(next.feedback.angularAcceleration))
+		return PME_INVALID_ARGUMENT;
+	*b = next;
 	return PME_OK;
 }

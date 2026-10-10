@@ -1,7 +1,7 @@
 #include "ccd_lab.h"
 #include <string.h>
 #define V YMPME_Vec3
-static const uint32_t indices[36] = {0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6, 0, 1, 5, 0, 5, 4,
+static const PME_Index indices[36] = {0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6, 0, 1, 5, 0, 5, 4,
                                      2, 6, 7, 2, 7, 3, 0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5};
 int CCDLab_Init(ccd_lab *s, int shape, int bounce)
 {

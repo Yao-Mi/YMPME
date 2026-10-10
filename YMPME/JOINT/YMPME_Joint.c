@@ -265,11 +265,13 @@ pme_result YMPME_Joint_ValidateStep(const pme_rigid_body *b, size_t n, const pme
 									double time)
 {
 	size_t i;
-	if ((n && !b) || (count && !j) || !isfinite(dt) || dt <= 0 || dt > .05f || !iterations ||
-		iterations > 256 || !YMPME_VecFinite(gravity) || !isfinite(time))
+	if ((n && !b) || (count && !j) || !isfinite(dt) || dt <= 0 || !isfinite(1.f / dt) ||
+		dt > .05f || !iterations || iterations > 256 || !YMPME_VecFinite(gravity) ||
+		!isfinite(time))
 		return PME_INVALID_ARGUMENT;
 	for (i = 0; i < n; ++i)
-		if (!YMPME_Rigid_IsValid(&b[i]) || time < b[i].feedback.time + dt * .5)
+		if (!YMPME_Rigid_IsValid(&b[i]) || time <= b[i].feedback.time ||
+			time < b[i].feedback.time + dt * .5)
 			return PME_INVALID_ARGUMENT;
 	for (i = 0; i < count; ++i)
 		if (!jointValid(&j[i], n))

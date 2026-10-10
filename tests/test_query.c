@@ -20,7 +20,7 @@ int main(void)
     pme_ray ray = {V(0, 0, 0), V(0, 0, 1), 100};
     pme_ray_hit hit, saved;
     const pme_vec3 vertices[] = {{0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-    const uint32_t indices[] = {0, 2, 1, 0, 1, 3, 0, 3, 2, 1, 2, 3};
+    const PME_Index indices[] = {0, 2, 1, 0, 1, 3, 0, 3, 2, 1, 2, 3};
     pme_vec3 faces[4], edges[12];
     pme_convex_mesh mesh;
     CHECK(YMPME_World_Init(&w, bodies, 6, NULL) == PME_OK);

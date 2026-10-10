@@ -175,7 +175,7 @@ static void transforms_mesh_friction(void)
     pme_convex_mesh mesh;
     for (int i = 0; i < 8; ++i)
         vertices[i] = V((i & 1 ? 1 : -1) * .01f, (i & 2 ? 1 : -1), (i & 4 ? 1 : -1));
-    uint32_t indices[36] = {0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6, 0, 1, 5, 0, 5, 4,
+    PME_Index indices[36] = {0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6, 0, 1, 5, 0, 5, 4,
                             2, 6, 7, 2, 7, 3, 0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5};
     CHECK(YMPME_ConvexMesh_Init(&mesh, vertices, 8, indices, 12, fa, 12, ea, 36) == PME_OK);
     init(&f, 1);

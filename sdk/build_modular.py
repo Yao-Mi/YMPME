@@ -15,7 +15,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 MODULE_OPTIONS = [
     "ENABLE_RIGID", "ENABLE_JOINT", "ENABLE_DYNAMICS", "ENABLE_QUERY", "ENABLE_FLIGHT",
-    "ENABLE_SOFTBODY", "MODEL_DRIVE", "MODEL_TERRAIN", "MODEL_SUSPENSION", "MODEL_VEHICLE",
+    "ENABLE_SOFTBODY", "ENABLE_STATICS", "ENABLE_STATICS3D", "ENABLE_SOLID_STATICS", "MODEL_DRIVE", "MODEL_TERRAIN", "MODEL_SUSPENSION", "MODEL_VEHICLE",
     "MODEL_GEAR", "MODEL_BELT", "MODEL_PULLEY", "MODEL_ROPE", "MODEL_AIRCRAFT", "MODEL_PENDULUM",
     "MODEL_SURFACE_ATLAS", "MODEL_SKIN", "SENSOR_IMU", "SENSOR_ENCODER", "SENSOR_FORCE",
     "SENSOR_LASER", "SENSOR_LIDAR", "SENSOR_DEPTH", "SENSOR_TACTILE",
@@ -32,7 +32,7 @@ def run(args, log):
         raise RuntimeError(f"Command failed; see {log}")
 
 def source_hash():
-    paths = [ROOT / "LICENSE", ROOT / "README.md", ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md", ROOT / "SHARED_MESH.md"]
+    paths = [ROOT / "LICENSE", ROOT / "README.md", ROOT / "CMakeLists.txt", ROOT / "API.md", ROOT / "ARCHITECTURE.md", ROOT / "MESH_COLLISION.md", ROOT / "SHARED_MESH.md", ROOT / "CHANGELOG.md", ROOT / "PROJECT.md", ROOT / "CMakePresets.json", ROOT / "Demo/demo_statics.c", ROOT / "Demo/demo_statics3d.c"]
     for folder in ("YMPME", "cmake", "sdk", "tests"):
         paths.extend(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
     h = hashlib.sha256()
@@ -169,7 +169,9 @@ endif()
             raise RuntimeError("Source changed during packaging; rerun to publish a consistent snapshot")
         cache = (work / "engine/CMakeCache.txt").read_text()
         compiler = re.search(r"^CMAKE_C_COMPILER:FILEPATH=(.+)$", cache, re.M).group(1)
-        version = re.search(r"project\(YMPME VERSION ([\d.]+)", (ROOT / "CMakeLists.txt").read_text()).group(1)
+        public_version = (ROOT / "YMPME/CONFIG/YMPME_PubDefine.h").read_text()
+        version = ".".join(re.search(r"^#define YMPME_VERSION_" + part + r" ([0-9]+)$",
+                                   public_version, re.M).group(1) for part in ("MAJOR", "MINOR", "PATCH"))
         info = {
             "version": version, "built_at_utc": datetime.now(timezone.utc).isoformat(),
             "system": platform.system(), "machine": platform.machine(), "profile": args.profile, "layout": "unified" if unified else "modular", "index_bits": args.index_bits,

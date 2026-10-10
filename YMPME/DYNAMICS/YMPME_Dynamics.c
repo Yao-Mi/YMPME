@@ -324,7 +324,7 @@ pme_result YMPME_Dynamics_Step(pme_dynamics *w, float dt, double time)
 		!isfinite(w->stabilization) || w->stabilization < 0 || w->stabilization > 1 ||
 		!isfinite(w->maxCorrectionSpeed) || w->maxCorrectionSpeed < 0 ||
 		!isfinite(w->bounceThreshold) || w->bounceThreshold < 0 || !isfinite(w->time) ||
-		time < w->time + dt * .5 ||
+		time <= w->time || time < w->time + dt * .5 ||
 		YMPME_Joint_ValidateStep(w->bodies, w->bodyCount, w->joints, w->jointCount, w->gravity, dt,
 								 w->iterations, time) != PME_OK)
 		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid dynamics world, buffers, solver parameters, bodies, joints or time");

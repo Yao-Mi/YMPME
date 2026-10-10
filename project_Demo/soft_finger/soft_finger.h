@@ -7,7 +7,7 @@ typedef struct soft_ball_proxy_
 {
 	pme_convex_mesh mesh;
 	pme_vec3 vertices[26], faces[48], edges[144];
-	uint32_t indices[144];
+	PME_Index indices[144];
 } soft_ball_proxy;
 typedef struct soft_finger_
 {

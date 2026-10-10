@@ -179,6 +179,179 @@
       "image_sha256": "dcc21e159d238ba5bf72c763b1eb105e49442442815ef03c04897bccabde32ac",
       "capture_note": "首个物理步后暂停；为截帧提前结束自检，不代表完整测试通过",
       "exit_code": 1
+    },
+    {
+      "image": "statics2d.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "1"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "59ad08aea6d13fb0ebb3c7635e2c7f514ed6ff952c99c9476361ea8d11abdd5b"
+    },
+    {
+      "image": "statics3d.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics3d_viewer/demo_statics3d_viewer",
+      "arguments": [
+        "--scene",
+        "3"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "abd2f20915e5f4c67d1e2a25a9ef48bed71b1cc1e1c48df8d854334cc9bbbb7d",
+      "image_sha256": "0a75cacd37dac9622eaef58812f1ed24eec0c41e893fd210dd6a9ddf92834f26"
+    },
+    {
+      "image": "solid_statics.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/solid_statics_viewer/demo_solid_statics_viewer",
+      "arguments": [
+        "--scene",
+        "2"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "ef6978975f45211207ce6b84644d6193102f1cdcd23d759e0efba928d288b206",
+      "image_sha256": "c6dcc4722e1b994d6c6dba6b0dcb2d0aaf17787aa0326c00512bb84d47e77716"
+    },
+    {
+      "image": "solid_statics_cut.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/solid_statics_viewer/demo_solid_statics_viewer",
+      "arguments": [
+        "--scene",
+        "2",
+        "--cut",
+        "--shading",
+        "element"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "ef6978975f45211207ce6b84644d6193102f1cdcd23d759e0efba928d288b206",
+      "image_sha256": "e82bae79695019348c9c5c046007c63128c31c5ab8e7266b5730c05935cb2375"
+    },
+    {
+      "image": "statics2d_truss.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "2"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "4cd235024650456f7c8f6ef89ed0d14c44f0cb7b56e50c4cd78146a8e0bc9698"
+    },
+    {
+      "image": "statics2d_springs.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "3"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "316e11bc2e287fa96cedc75d3109a0523878330174792061b2113ee1c5be5a55"
+    },
+    {
+      "image": "statics2d_simple_beam.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "4"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "6a0594eef7ee87818d619d767c075bbbc9b0aaa569f50f348d51804ef607785d"
+    },
+    {
+      "image": "statics2d_continuous_beam.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "5"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "af140ab7819c101bf4d9ce995f6de66e664569de31977735281674a0129f4990"
+    },
+    {
+      "image": "statics2d_frame.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "6"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "d80641d60f5f6da625c03c40665b27b8475daf5287696ca463737e8691e4b948"
+    },
+    {
+      "image": "statics2d_bridge.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics_viewer/demo_statics_viewer",
+      "arguments": [
+        "--scene",
+        "7"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "1f289254b18a0985c7b67924067328eb265b27c4378bb38702a5c95ff25a1ee7",
+      "image_sha256": "34d778171a6e132dee6e022900f5d005203da618cb05f4b3277f46df56628c90"
+    },
+    {
+      "image": "statics3d_bending.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics3d_viewer/demo_statics3d_viewer",
+      "arguments": [
+        "--scene",
+        "1"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "abd2f20915e5f4c67d1e2a25a9ef48bed71b1cc1e1c48df8d854334cc9bbbb7d",
+      "image_sha256": "8e496989c4c2b0eed9fad3b616e3e0b62381dc00313d6dbe6542b2509ba78f12"
+    },
+    {
+      "image": "statics3d_truss.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/statics3d_viewer/demo_statics3d_viewer",
+      "arguments": [
+        "--scene",
+        "2"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "abd2f20915e5f4c67d1e2a25a9ef48bed71b1cc1e1c48df8d854334cc9bbbb7d",
+      "image_sha256": "5ed4d90c7c2fe38974268f7787f3abd8ec4ae2f0a0de5c089f0a9d38d6f03ec2"
+    },
+    {
+      "image": "solid_statics_cube.png",
+      "captured_on": "2026-09-20",
+      "executable": "build/Demo/solid_statics_viewer/demo_solid_statics_viewer",
+      "arguments": [
+        "--scene",
+        "1"
+      ],
+      "max_frames": 5,
+      "exit_code": 0,
+      "binary_sha256": "ef6978975f45211207ce6b84644d6193102f1cdcd23d759e0efba928d288b206",
+      "image_sha256": "f8a6e4f1d5b11594a0f75bc6cc7e517cda8791d53a23dbd6fa68cacfddf4cfe6"
     }
-  ]
+  ],
+  "updated_on": "2026-09-20"
 }

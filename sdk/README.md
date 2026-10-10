@@ -7,7 +7,7 @@
 | `include/YMPME/` | 核心及可选模块头文件，保持原有目录结构 |
 | `lib/` | 分模块静态库；只链接需要的目标及其必要依赖 |
 | `cmake/` | `find_package(YMPME CONFIG REQUIRED)` 配置及版本信息 |
-| `examples/` | 自由落体、刚体接触、编码器、共享网格及可选 GRE 共享示例 |
+| `examples/` | 版本检查、自由落体、刚体接触、编码器、静力、共享网格及可选 GRE 共享示例 |
 | `bin/` | 本机构建的无窗口示例可执行文件 |
 | `docs/`、`手册.md` | API、架构、碰撞说明和 SDK 使用方法 |
 | `BUILD_INFO.json` | 平台、编译器、构建选项、源码摘要 |
@@ -22,7 +22,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(my_sim C)
 set(CMAKE_C_STANDARD 99)
-find_package(YMPME 0.3 CONFIG REQUIRED COMPONENTS dynamics)
+find_package(YMPME 0.4 CONFIG REQUIRED COMPONENTS dynamics)
 add_executable(my_sim main.c)
 target_link_libraries(my_sim PRIVATE YMPME::dynamics)
 ```

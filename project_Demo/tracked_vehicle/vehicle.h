@@ -24,7 +24,7 @@ typedef struct tv_geometry_ {
     pme_convex_mesh mesh;
     pme_vec3 vertices[TV_MESH_VERTICES], faceAxes[TV_MESH_TRIANGLES],
         edgeAxes[TV_MESH_TRIANGLES * 3];
-    uint32_t indices[TV_MESH_TRIANGLES * 3];
+    PME_Index indices[TV_MESH_TRIANGLES * 3];
 } tv_geometry;
 typedef struct tracked_vehicle_ {
     pme_rigid_body bodies[TV_BODIES];

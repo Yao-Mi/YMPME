@@ -93,7 +93,7 @@ static void compound(void)
 	CHECK(f.b[1].angularVelocity.z > 0);
 	CHECK(fabsf(f.contacts[0].reactionB.torque.z - .6f * f.contacts[0].reactionB.force.y) < .001f);
 }
-static const uint32_t ix[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
+static const PME_Index ix[36] = {0, 4, 6, 0, 6, 2, 1, 3, 7, 1, 7, 5, 0, 1, 5, 0, 5, 4,
 								2, 6, 7, 2, 7, 3, 0, 2, 3, 0, 3, 1, 4, 5, 7, 4, 7, 6};
 static void transformed_geometry(void)
 {

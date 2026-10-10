@@ -10,7 +10,9 @@
 
 </div>
 
-YMPME 面向小游戏、机构实验与控制仿真：从差速小车、齿轮和绳索，到刚体履带、软指抓取、飞行与全身触觉。物理由 PME 计算，窗口与显示交给 **YMGRE**，需要骨骼动画的应用再接入 **YMSKE**。核心库可独立运行，按 PC / MCU 的使用方式设计。
+当前源码版本 **0.4.0** · [版本记录](CHANGELOG.md) · [稳定性与构建验证](tests/README.md)
+
+YMPME 面向小游戏、机构实验与控制仿真：从差速小车、齿轮和绳索，到刚体履带、软指抓取、飞行与全身触觉，也提供独立可裁剪的结构有限元静力分析。物理由 PME 计算，窗口与显示交给 **YMGRE**，需要骨骼动画的应用再接入 **YMSKE**。核心库可独立运行，按 PC / MCU 的使用方式设计。
 
 [![三组齿轮同时运行：理想约束、紧耦合逐齿碰撞、带齿隙碰撞](docs/screenshots/gear_mesh.png)](docs/screenshots/gear_mesh.png)
 
@@ -20,7 +22,7 @@ YMPME 面向小游戏、机构实验与控制仿真：从差速小车、齿轮�
 
 以下均为现有可执行程序经 GRE 渲染的实际完整帧，保留读数与操作界面。点击图片查看原图；[截图记录](docs/screenshots/README.md)包含复现参数。截图展示对应构建的运行状态，不作为性能基准。
 
-[机械与绳索](#机械与绳索) · [车辆与飞行](#车辆与飞行) · [抓取与感知](#抓取与感知) · [更多入门演示](#更多入门演示)
+[机械与绳索](#机械与绳索) · [车辆与飞行](#车辆与飞行) · [抓取与感知](#抓取与感知) · [有限元静力分析](#有限元静力分析) · [更多入门演示](#更多入门演示)
 
 ### 机械与绳索
 
@@ -76,6 +78,50 @@ YMPME 面向小游戏、机构实验与控制仿真：从差速小车、齿轮�
 
 **同一个世界，多种观测。** 2D 360° 雷达、深度相机、触觉阵列，以及 IMU、编码器和六维测力读数。[进入 demo →](project_Demo/sensor_lab/README.md)
 
+### 有限元静力分析
+
+**从杆梁内力到三维实体应力。** 三个 C99 静力模块可分别开启，直接输入材料、网格、节点载荷与位移约束，输出位移、支座反力及单元结果；求解不依赖 GRE、DYNAMICS 或传感器，GRE 只负责交互显示。
+
+**二维结构：7 个算例全部展示。** 在[二维窗口](Demo/statics_viewer/README.md)按 `1`～`7` 切换，`Tab` 选择节点查看位移、转角和反力。
+
+| 1 · 悬臂梁 | 2 · 三角桁架 |
+| :--- | :--- |
+| [![1 · 悬臂梁](docs/screenshots/statics2d.png)](docs/screenshots/statics2d.png) | [![2 · 三角桁架](docs/screenshots/statics2d_truss.png)](docs/screenshots/statics2d_truss.png) |
+| 左端固支，2 m 梁端向下 10 N；颜色表示弯矩。 | 左铰右滚，顶部向下 10 N；底杆受拉、斜杆受压。 |
+
+| 3 · 串联弹簧 | 4 · 简支梁 |
+| :--- | :--- |
+| [![3 · 串联弹簧](docs/screenshots/statics2d_springs.png)](docs/screenshots/statics2d_springs.png) | [![4 · 简支梁](docs/screenshots/statics2d_simple_beam.png)](docs/screenshots/statics2d_simple_beam.png) |
+| 两个 1000 N/m 轴向弹簧，右端拉力 10 N；节点约束 Y 向运动。 | 2 m 梁左铰右滚，跨中向下 10 N；观察挠度与两端支反力。 |
+
+| 5 · 两跨连续梁 | 6 · 门式框架 |
+| :--- | :--- |
+| [![5 · 两跨连续梁](docs/screenshots/statics2d_continuous_beam.png)](docs/screenshots/statics2d_continuous_beam.png) | [![6 · 门式框架](docs/screenshots/statics2d_frame.png)](docs/screenshots/statics2d_frame.png) |
+| 总长 4 m，左跨跨中向下 10 N；采用可承受抗拔反力的双向支承。 | 两柱脚固支，右上角 Fx=10 N、Fy=-10 N；查看刚接框架侧移与弯矩。 |
+
+| 7 · Warren 桥式桁架 |
+| :--- |
+| [![7 · Warren 桥式桁架](docs/screenshots/statics2d_bridge.png)](docs/screenshots/statics2d_bridge.png) |
+| 9 节点、15 杆、跨度 4 m；中部下弦向下 10 N，红拉蓝压。 |
+
+**三维杆梁：3 个算例全部展示。** 在[三维窗口](Demo/statics3d_viewer/README.md)按 `1`～`3` 切换；这是杆梁单元，每节点最多 6 自由度。
+
+| 1 · 双向弯曲悬臂梁 | 2 · 空间四杆桁架 | 3 · 扭转悬臂梁 |
+| :--- | :--- | :--- |
+| [![1 · 双向弯曲悬臂梁](docs/screenshots/statics3d_bending.png)](docs/screenshots/statics3d_bending.png) | [![2 · 空间四杆桁架](docs/screenshots/statics3d_truss.png)](docs/screenshots/statics3d_truss.png) | [![3 · 扭转悬臂梁](docs/screenshots/statics3d.png)](docs/screenshots/statics3d.png) |
+| 根部六自由度固定，端部 Fy=-10 N、Fz=5 N；显示两个方向的弯曲。 | 四个底部节点固定平移，顶部向下 10 N；按杆件轴力着色。 | 端部 Mx=3 N·m；截面标记显示累积扭转，纯扭转时中心线保持笔直。 |
+
+**三维实体：2 个算例各展示一次。** 在[实体窗口](Demo/solid_statics_viewer/README.md)按 `1` / `2` 切换；下图均为 von Mises 应力云图。
+
+| 1 · 立方体压缩 | 2 · 块体弯曲 |
+| :--- | :--- |
+| [![1 · 立方体压缩](docs/screenshots/solid_statics_cube.png)](docs/screenshots/solid_statics_cube.png) | [![2 · 块体弯曲](docs/screenshots/solid_statics.png)](docs/screenshots/solid_statics.png) |
+| 200×200×200 mm；729 节点、3072 个 TET4 单元。X− 面固定，X+ 面向 −X 均匀受力，总力 1000 N。 | 400×120×120 mm；325 节点、1152 个 TET4 单元。一端固定，另一端面沿 −Y 均匀受力，总力 1000 N。 |
+
+实体窗口还支持 **Z 内部切片、H 平滑 / 原始单元 / 统一颜色、C 应力 / 位移 / 应变能密度、M 粗细网格**。切片只改变显示，平滑云图使用节点平均值，不提高求解精度；上面每个可切换算例只放一张图。
+
+当前均为**小变形、线弹性静力分析**：改变载荷后重新求平衡，不包含振动、塑性、屈曲或接触非线性。显示倍率只放大画面，读数保持实际计算值；实体局部峰值需结合网格细化检查。这些模块与软指 demo 的 SOFTBODY 近似材料模型各自独立。
+
 ### 更多入门演示
 
 <details>
@@ -104,6 +150,7 @@ YMPME 面向小游戏、机构实验与控制仿真：从差速小车、齿轮�
 | 复用模型 | 绳索、齿轮、皮带、滑轮、差速驱动、高度场、悬挂、车辆、单摆与飞行预设，按模块开启。 |
 | 控制与观测 | 位置、姿态、速度、加速度、角速度和载荷真值；可选 IMU、uint16 单圈编码器、测力、激光、雷达、深度与触觉模块。 |
 | 触觉与材料 | 曲面法向 / 切向力、参考面积上的平均压力、固定拓扑栅格；可选软垫和软球近似材料模型。普通物体无需创建 skin。 |
+| 有限元静力 | 二维弹簧 / 桁架 / 梁框架、三维杆梁弯扭、TET4 实体；位移、反力、杆梁内力及实体应力 / 应变 / 应变能，三个模块独立裁剪。 |
 | 可视化与动画 | GRE 负责窗口、输入和渲染；模型状态通过适配层同步。手、人体、猫头鹰 demo 在应用层接入 YMSKE。 |
 
 默认使用**米、千克、秒**，Y 轴向上。物理固定步长与显示刷新分开；具体机构步长、迭代数及近似范围见对应 demo。
@@ -142,6 +189,24 @@ cmake --build build --target demo_gear_mesh -j
 
 这组命令构建齿轮示例。其他 demo 按各自文档启用所需模块；例如关节抓取需要 `YMPME_ENABLE_DYNAMICS=ON` 与 `YMPME_SENSOR_TACTILE=ON`，再构建 `demo_grasp_lab`。
 
+### 打开有限元分析窗口
+
+下面一次开启三个独立模块及其 GRE 窗口；只需要其中一种时，保留对应的一对 `ENABLE_*` / `BUILD_*_VIEWER` 开关即可：
+
+```sh
+cmake -S . -B build \
+  -DYMPME_GRE_ROOT=../0502_YMGRE \
+  -DYMPME_ENABLE_STATICS=ON -DYMPME_BUILD_STATICS_VIEWER=ON \
+  -DYMPME_ENABLE_STATICS3D=ON -DYMPME_BUILD_STATICS3D_VIEWER=ON \
+  -DYMPME_ENABLE_SOLID_STATICS=ON -DYMPME_BUILD_SOLID_STATICS_VIEWER=ON
+cmake --build build --target demo_statics_viewer demo_statics3d_viewer demo_solid_statics_viewer -j
+./build/Demo/statics_viewer/demo_statics_viewer
+./build/Demo/statics3d_viewer/demo_statics3d_viewer
+./build/Demo/solid_statics_viewer/demo_solid_statics_viewer
+```
+
+三个可执行文件都可直接双击，不依赖启动目录或外部模型资源。数字键切换算例；实体窗口按 **Z 切片、H 换着色方式、C 换物理量、M 换网格密度**。只调用求解库时无需启用窗口开关，也无需 GRE；链接目标和 API 见下方模块表。
+
 ### 直接找可执行文件
 
 已有主工程构建的窗口 demo 通常位于 `build/project_Demo/<名称>/demo_<名称>`，可以直接双击。全部构建产物放在 `build/` 内；独立子工程的输出位置以对应说明为准。人体使用 `build/human` 的六槽蒙皮配置，猫头鹰使用 `build/owl_flight` 的四槽配置。
@@ -170,6 +235,9 @@ cmake --build build --target demo_gear_mesh -j
 | [hand_ball](project_Demo/hand_ball/README.md) | 手掌把玩球，UV 三维力图与方向箭头。 |
 | [human_skin](project_Demo/human_skin/README.md) | 手摸身体、自体接触、全身触觉图与格子拾取。 |
 | [human_ground](project_Demo/human_ground/README.md) | 规定动作下的脚底接触，固定全身观测导出。 |
+| [statics_viewer](Demo/statics_viewer/README.md) | 二维弹簧、桁架、梁与框架，7 个静力算例。 |
+| [statics3d_viewer](Demo/statics3d_viewer/README.md) | 空间桁架、梁双向弯曲与扭转。 |
+| [solid_statics_viewer](Demo/solid_statics_viewer/README.md) | TET4 实体应力云图、内部切面、位移与应变能。 |
 
 数值入门：`demo_free_fall` 与 [bouncing_ball](project_Demo/bouncing_ball/README.md)。每个 demo 的构建入口、按键及物理范围见上表链接。
 
@@ -188,12 +256,13 @@ YMPME/
 ├── MODEL/           可复用机构、车辆、飞行与曲面观测模型
 ├── SENSOR/          可选传感器与采样接口
 ├── SOFTBODY/        可选软垫与软球材料近似
+├── STATICS/         可选二维 / 三维杆梁与 TET4 实体静力分析
 ├── EXT/FLIGHT/      旋翼与气动力载荷
 ├── OPOBJ/           物体描述、初始化及生命周期
 ├── BRIDGE/          可选渲染适配
 └── YMPME.h          聚合头文件
-Demo/                单模块最小示例
-project_Demo/        交互场景与 GRE 窗口
+Demo/                单模块示例（可含窗口与交互）
+project_Demo/        多模块组合的完整应用场景
 Resource/            示例资源
 extern_lib/          外部依赖约定
 sdk/                 SDK 打包、消费示例与手册
@@ -210,6 +279,9 @@ tests/              无窗口与窗口回归测试
 | 几何查询与传感器 | `YMPME_ENABLE_QUERY`、`YMPME_SENSOR_<名称>` | [QUERY](YMPME/CORE/QUERY/README.md) · [SENSOR](YMPME/SENSOR/README.md) |
 | 曲面触觉与栅格 | `YMPME_MODEL_SKIN`、`YMPME_MODEL_SURFACE_ATLAS`、`YMPME_SENSOR_TACTILE` | [SKIN](YMPME/MODEL/SKIN/README.md) · [拓扑网格](YMPME/MODEL/SURFACE_ATLAS/TOPOLOGY_GRID.md) |
 | 近似柔性材料 | `YMPME_ENABLE_SOFTBODY` | [SOFTBODY](YMPME/SOFTBODY/README.md) |
+| 二维结构静力 | `YMPME_ENABLE_STATICS`；链接 `YMPME::statics` | [STATICS](YMPME/STATICS/README.md) |
+| 三维杆梁静力 | `YMPME_ENABLE_STATICS3D`；链接 `YMPME::statics3d` | [STATICS3D](YMPME/STATICS/README3D.md) |
+| 三维实体静力 | `YMPME_ENABLE_SOLID_STATICS`；链接 `YMPME::solid_statics` | [SolidStatics](YMPME/STATICS/README-solid.md) |
 | GRE 显示 / 适配 | `YMPME_BUILD_GRE_DEMO` / `YMPME_BUILD_GRE_BRIDGE` | [最小窗口](project_Demo/gre_bouncing_ball/README.md) |
 
 各模块声明必要依赖，不必为了使用物理而开启所有传感器。模型优先使用调用方缓冲，初始化建立绑定，步进与显示复用状态和网格；正常帧避免反复分配。涉及布局转换的适配仍有必要的读写成本，详见 [模型对接约定](YMPME/MODEL/README.md#高效对接约定)。
@@ -230,6 +302,7 @@ tests/              无窗口与窗口回归测试
 - **精检测当前面向闭合凸网格。** 不提供自动凸包或通用凹网格求解；高度场由车辆模型单独采样。配对仍以小规模场景为目标，尚无通用岛划分、休眠与窄相位空间树。
 - **CCD 有明确范围。** 当前支持满足配置条件的动态球对静态环境，动态体之间、旋转非球体和关节机构仍采用离散接触，不能据此保证高速齿轮或履带不穿透。
 - **反馈与材料有近似。** 冲量 / dt 是子步平均载荷，含稳定化修正；面片力 / 参考面积是整片平均压力。软垫与软球不是通用 FEM，人体步态是规定骨骼运动下的接触观测，猫头鹰采用等效鸟类翼面预设。
+- **有限元目前限于线弹性静力。** STATICS 的杆梁与实体求解独立于运动仿真，不自动接入刚体碰撞；不包含大变形、塑性、屈曲、断裂或瞬态动力学。
 - **部署前测量目标工况。** MCU 性能需要在实际硬件上验证；较长机构、高速度和高刚度需实测步长与迭代数，浮点结果不保证跨平台逐位一致。
 
 接口和所有权见 [API](API.md)；结构与路线见 [ARCHITECTURE](ARCHITECTURE.md)、[PROJECT](PROJECT.md)；Mesh 精检测、开关和过滤见 [MESH_COLLISION](MESH_COLLISION.md)。

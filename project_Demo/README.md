@@ -1,5 +1,7 @@
 # 完整流程示例
 
+多个模块组合的完整应用场景放在这里。单模块示例（包括带窗口的演示）放在 `Demo/`。
+
 - `bouncing_ball`：无窗口固定时钟、弹跳、渲染插值，输出 CSV 到标准输出。
 - `gre_bouncing_ball`：链接真实 YMGRE，在 YMGUI/SDL 窗口实时显示弹跳，支持暂停、重置、再次弹起；--headless 可输出 PPM 帧。
 

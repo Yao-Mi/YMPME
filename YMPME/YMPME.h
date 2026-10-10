@@ -32,4 +32,13 @@
 #include "SOFTBODY/YMPME_SoftPad.h"
 #include "SOFTBODY/YMPME_SoftBall.h"
 #endif
+#if PME_ENABLE_STATICS
+#include "STATICS/YMPME_Statics.h"
+#endif
+#if PME_ENABLE_STATICS3D
+#include "STATICS/YMPME_Statics3D.h"
+#endif
+#if PME_ENABLE_SOLID_STATICS
+#include "STATICS/YMPME_SolidStatics.h"
+#endif
 #endif

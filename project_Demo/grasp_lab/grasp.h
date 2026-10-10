@@ -16,7 +16,7 @@ typedef struct grasp_geometry_
 {
 	pme_convex_mesh mesh;
 	pme_vec3 vertices[16], faceAxes[28], edgeAxes[84];
-	uint32_t indices[84];
+	PME_Index indices[84];
 	pme_vec3 inertia;
 } grasp_geometry;
 int Grasp_Geometry(grasp_geometry *g, int shape, float mass);

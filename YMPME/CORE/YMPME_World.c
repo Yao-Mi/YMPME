@@ -1,17 +1,17 @@
-#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_World.h"
+#include "../CONFIG/YMPME_PubDefine.h"
+#include "../DEBUG/YMPME_Log.h"
 #include "YMPME_MathBase.h"
 #include "YMPME_Solver.h"
-#include "../CONFIG/YMPME_PubDefine.h"
 #include <limits.h>
 #include <string.h>
 static int validConfig(const pme_world_desc *d)
 {
 	return d && YMPME_VecFinite(d->gravity) && isfinite(d->fixedStep) && d->fixedStep > 0 &&
-		   d->maxSubsteps > 0 && d->maxSubsteps <= INT_MAX && d->solverIterations > 0 &&
-		   isfinite(d->penetrationSlop) && d->penetrationSlop >= 0 && isfinite(d->correctionRate) &&
-		   d->correctionRate > 0 && d->correctionRate <= 1 && isfinite(d->bounceThreshold) &&
-		   d->bounceThreshold >= 0;
+		   isfinite(1.f / d->fixedStep) && d->maxSubsteps > 0 && d->maxSubsteps <= INT_MAX &&
+		   d->solverIterations > 0 && isfinite(d->penetrationSlop) && d->penetrationSlop >= 0 &&
+		   isfinite(d->correctionRate) && d->correctionRate > 0 && d->correctionRate <= 1 &&
+		   isfinite(d->bounceThreshold) && d->bounceThreshold >= 0;
 }
 static int validWorld(const pme_world *w)
 {
@@ -35,7 +35,8 @@ pme_result YMPME_World_Init(PME_World w, PME_Body storage, size_t capacity,
 {
 	pme_world_desc d = desc ? *desc : YMPME_World_DefaultDesc();
 	if (!w || !storage || !capacity || capacity > SIZE_MAX / sizeof(*storage) || !validConfig(&d))
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid world, storage, capacity or world configuration");
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Invalid world, storage, capacity or world configuration");
 	memset(w, 0, sizeof(*w));
 	memset(storage, 0, capacity * sizeof(*storage));
 	w->config = d;
@@ -51,7 +52,8 @@ pme_result YMPME_World_Init(PME_World w, PME_Body storage, size_t capacity,
 PME_Body YMPME_World_AddBody(PME_World w, const pme_body_desc *desc)
 {
 	size_t i;
-	if (!validWorld(w)) {
+	if (!validWorld(w))
+	{
 		YMPME_LOG(PME_LOG_ERROR, PME_INVALID_ARGUMENT, "AddBody requires a valid world");
 		return NULL;
 	}
@@ -166,8 +168,9 @@ static void stepWorld(PME_World w, float dt, pme_world_feedback *feedback)
 }
 pme_result YMPME_World_Step(PME_World w, float dt)
 {
-	if (!validWorld(w) || !isfinite(dt) || dt <= 0)
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Step requires a valid world and finite positive timestep");
+	if (!validWorld(w) || !isfinite(dt) || dt <= 0 || !isfinite(1.f / dt))
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Step requires a valid world and finite positive timestep");
 	memset(&w->collisionStats, 0, sizeof(w->collisionStats));
 	stepWorld(w, dt, NULL);
 	clearForces(w);
@@ -178,7 +181,8 @@ int YMPME_World_Advance(PME_World w, float frameTime)
 	unsigned steps = 0;
 	double dt;
 	if (!validWorld(w) || !isfinite(frameTime) || frameTime < 0)
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Advance requires a valid world and finite nonnegative frame time");
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Advance requires a valid world and finite nonnegative frame time");
 	memset(&w->collisionStats, 0, sizeof(w->collisionStats));
 	dt = w->config.fixedStep;
 	w->accumulator += frameTime;
@@ -207,7 +211,9 @@ float YMPME_World_InterpolationAlpha(const pme_world *w)
 pme_result YMPME_World_Destroy(PME_World w)
 {
 	if (!validWorld(w) || w->ownsMemory)
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Destroy requires a valid caller-owned world; use Free for allocated worlds");
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Destroy requires a valid caller-owned world; use Free "
+							"for allocated worlds");
 	memset(w->bodies, 0, w->capacity * sizeof(*w->bodies));
 	memset(w, 0, sizeof(*w));
 	return PME_OK;
@@ -216,7 +222,8 @@ pme_result YMPME_World_Destroy(PME_World w)
 pme_result YMPME_World_SetGroupCollision(PME_World w, uint32_t a, uint32_t b, int enabled)
 {
 	if (!validWorld(w) || a >= 32 || b >= 32)
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Collision group indices must be in 0..31 and world must be valid");
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Collision group indices must be in 0..31 and world must be valid");
 	if (enabled)
 	{
 		w->groupMasks[a] |= UINT32_C(1) << b;
@@ -242,11 +249,13 @@ int YMPME_World_Collide(PME_World w, const pme_body *a, const pme_body *b, pme_c
 
 pme_result YMPME_World_StepWithFeedback(PME_World w, float dt, pme_world_feedback *f)
 {
-	if (!validWorld(w) || !isfinite(dt) || dt <= 0 || !f || !isfinite(f->time) || f->time < 0 ||
-		!f->states || f->stateCapacity < w->capacity || (f->contactCapacity && !f->contacts))
-		return YMPME_REPORT(PME_INVALID_ARGUMENT, "Invalid feedback buffers, capacities, time, world or timestep");
+	if (!validWorld(w) || !isfinite(dt) || dt <= 0 || !isfinite(1.f / dt) || !f ||
+		!isfinite(f->time) || f->time < 0 || !f->states || f->stateCapacity < w->capacity ||
+		(f->contactCapacity && !f->contacts))
+		return YMPME_REPORT(PME_INVALID_ARGUMENT,
+							"Invalid feedback buffers, capacities, time, world or timestep");
 	f->count = f->dropped = 0;
-    f->stateCount=w->capacity;
+	f->stateCount = w->capacity;
 	f->interval = dt;
 	for (size_t i = 0; i < w->capacity; ++i)
 	{

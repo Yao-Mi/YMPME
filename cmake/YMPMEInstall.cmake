@@ -4,6 +4,16 @@ set(_ympme_modules ympme rigid joint dynamics query flight
     drive terrain suspension vehicle gear belt pulley rope aircraft pendulum
     surface_atlas skin_contact softbody sensor sensor_geometry
     imu encoder force_sensor laser lidar depth tactile)
+# New statics is optional even for existing unified SDK configurations.
+if(TARGET ympme_statics)
+    list(APPEND _ympme_modules statics)
+endif()
+if(TARGET ympme_statics3d)
+    list(APPEND _ympme_modules statics3d)
+endif()
+if(TARGET ympme_solid_statics)
+    list(APPEND _ympme_modules solid_statics)
+endif()
 set(YMPME_SDK_COMPONENTS "")
 set(_ympme_install_targets "")
 foreach(_module IN LISTS _ympme_modules)
@@ -120,3 +130,12 @@ install(FILES "${PROJECT_SOURCE_DIR}/YMPME/BRIDGE/YMPME_GREMesh.c"
 
 install(FILES "${PROJECT_SOURCE_DIR}/SHARED_MESH.md" DESTINATION docs)
 install(FILES "${PROJECT_SOURCE_DIR}/YMPME/DEBUG/README.md" DESTINATION docs RENAME DEBUG.md)
+
+install(FILES "${PROJECT_SOURCE_DIR}/CHANGELOG.md" DESTINATION docs)
+install(FILES "${PROJECT_SOURCE_DIR}/YMPME/STATICS/README.md" DESTINATION docs RENAME STATICS.md)
+install(FILES "${PROJECT_SOURCE_DIR}/YMPME/STATICS/README3D.md" DESTINATION docs RENAME STATICS3D.md)
+install(FILES "${PROJECT_SOURCE_DIR}/YMPME/STATICS/README-solid.md" DESTINATION docs RENAME SOLID_STATICS.md)
+
+foreach(component statics statics3d)
+ install(FILES "${PROJECT_SOURCE_DIR}/Demo/demo_${component}.c" DESTINATION examples RENAME demo_sdk_${component}.c)
+endforeach()

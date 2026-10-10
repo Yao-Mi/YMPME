@@ -1,0 +1,152 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "verification-base",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/verification/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "YMPME_BUILD_TESTS": "ON",
+        "YMPME_BUILD_DEMOS": "OFF",
+        "YMPME_BUILD_GRE_DEMO": "OFF",
+        "YMPME_BUILD_GRE_BRIDGE": "OFF",
+        "YMPME_BUILD_ROPE_GRE": "OFF",
+        "YMPME_BUILD_HAND_BALL_DEMO": "OFF",
+        "YMPME_BUILD_HAND_SKIN_DEMO": "OFF",
+        "YMPME_BUILD_STATICS_VIEWER": "OFF",
+        "YMPME_BUILD_STATICS3D_VIEWER": "OFF",
+        "YMPME_BUILD_SOLID_STATICS_VIEWER": "OFF",
+        "YMPME_INSTALL_SDK": "ON",
+        "YMPME_INDEX_BITS": "32"
+      }
+    },
+    {
+      "name": "core",
+      "inherits": "verification-base",
+      "displayName": "Core only (Release)"
+    },
+    {
+      "name": "headless",
+      "inherits": "verification-base",
+      "displayName": "All physics modules, no rendering",
+      "cacheVariables": {
+        "YMPME_ENABLE_RIGID": "ON",
+        "YMPME_ENABLE_JOINT": "ON",
+        "YMPME_ENABLE_DYNAMICS": "ON",
+        "YMPME_ENABLE_QUERY": "ON",
+        "YMPME_ENABLE_FLIGHT": "ON",
+        "YMPME_ENABLE_SOFTBODY": "ON",
+        "YMPME_ENABLE_STATICS": "ON",
+        "YMPME_ENABLE_STATICS3D": "ON",
+        "YMPME_ENABLE_SOLID_STATICS": "ON",
+        "YMPME_MODEL_DRIVE": "ON",
+        "YMPME_MODEL_TERRAIN": "ON",
+        "YMPME_MODEL_SUSPENSION": "ON",
+        "YMPME_MODEL_VEHICLE": "ON",
+        "YMPME_MODEL_GEAR": "ON",
+        "YMPME_MODEL_BELT": "ON",
+        "YMPME_MODEL_PULLEY": "ON",
+        "YMPME_MODEL_ROPE": "ON",
+        "YMPME_MODEL_AIRCRAFT": "ON",
+        "YMPME_MODEL_PENDULUM": "ON",
+        "YMPME_MODEL_SURFACE_ATLAS": "ON",
+        "YMPME_MODEL_SKIN": "ON",
+        "YMPME_SENSOR_IMU": "ON",
+        "YMPME_SENSOR_ENCODER": "ON",
+        "YMPME_SENSOR_FORCE": "ON",
+        "YMPME_SENSOR_LASER": "ON",
+        "YMPME_SENSOR_LIDAR": "ON",
+        "YMPME_SENSOR_DEPTH": "ON",
+        "YMPME_SENSOR_TACTILE": "ON"
+      }
+    },
+    {
+      "name": "headless16",
+      "inherits": "headless",
+      "displayName": "All physics modules, 16-bit indices",
+      "cacheVariables": {
+        "YMPME_INDEX_BITS": "16"
+      }
+    },
+    {
+      "name": "sanitize",
+      "inherits": "headless",
+      "displayName": "All physics modules with ASan/UBSan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "YMPME_ENABLE_SANITIZERS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "core",
+      "configurePreset": "core"
+    },
+    {
+      "name": "headless",
+      "configurePreset": "headless"
+    },
+    {
+      "name": "headless16",
+      "configurePreset": "headless16"
+    },
+    {
+      "name": "sanitize",
+      "configurePreset": "sanitize"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "core",
+      "configurePreset": "core",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "timeout": 180
+      }
+    },
+    {
+      "name": "headless",
+      "configurePreset": "headless",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "timeout": 180
+      }
+    },
+    {
+      "name": "headless16",
+      "configurePreset": "headless16",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "timeout": 180
+      }
+    },
+    {
+      "name": "sanitize",
+      "configurePreset": "sanitize",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "timeout": 180
+      },
+      "environment": {
+        "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+        "ASAN_OPTIONS": "halt_on_error=1"
+      }
+    }
+  ]
+}

@@ -134,3 +134,11 @@ World 默认 `meshPrecision=1`；涉及 Mesh 的配对可以切换为 AABB 模�
 `DEBUG/YMPME_Log.h` 提供 `YMPME_LOG`、`YMPME_REPORT`、`YMPME_ASSERT`，以及 SetLogger、ResetLogger、Log、Report、ResultString、LevelString 和 AssertFail 接口（函数前缀均为 `YMPME_Debug_`）。默认 WARNING/ERROR 输出至 stderr，普通日志不终止进程；断言单独编译控制，默认关闭。源代码详见 `YMPME/DEBUG/README.md`，SDK 中对应文档为 `docs/DEBUG.md`。
 
 日志只补充诊断，原有返回值和状态修改规则保持不变。当前重点覆盖物体、基础世界、凸网格、动力学步进和 GRE 共享绑定错误；不是所有传感器/模型接口都已接入。配置是库级别的，仿真运行前设置，不能并发修改；回调同步消费借用记录，禁止重入日志。
+
+## 0.4.0：版本与步进边界
+
+`YMPME_VERSION_MAJOR/MINOR/PATCH` 和 `YMPME_VERSION_STRING` 描述编译头文件；`YMPME_VersionString()` 返回已链接库的版本字符串。CMake 和 SDK 构建使用同一宏来源，外部程序可比较两者，识别旧库或混用头文件。
+
+RIGID/JOINT/DYNAMICS 的步末时间必须能够严格前进；极小到 `1/dt` 无法有限表示的步长被拒绝，CORE 的固定步长和反馈步进亦检查这一边界。单独 `YMPME_Rigid_Step` 在局部副本求解，结果或导数溢出返回 `PME_INVALID_ARGUMENT` 且保留输入。分阶段接口仍由调用者保证数值范围，不提供任意极端有限输入的全机构回滚保证。
+
+三个静力组件分别为 `YMPME::statics`、`YMPME::statics3d`、`YMPME::solid_statics`，见 `YMPME/STATICS/` 文档。升级到新的 minor 版本或更换索引位宽时重新编译，不能混用不一致的结构布局。
